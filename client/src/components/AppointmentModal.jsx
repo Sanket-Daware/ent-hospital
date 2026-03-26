@@ -53,10 +53,17 @@ const AppointmentModal = ({ isOpen, onClose }) => {
         e.preventDefault();
         setError('');
 
-        // 1. Show the "Processing Payment" screen
+        // 1. Validate contact number (exactly 10 digits)
+        const contactDigits = formData.contact.replace(/\D/g, '');
+        if (contactDigits.length !== 10) {
+            setError('Please enter a valid 10-digit contact number.');
+            return;
+        }
+
+        // 2. Show the "Processing Payment" screen
         setStep('paying');
 
-        // 2. Simulate a delay for "Payment Processing" and then show success
+        // 3. Simulate a delay for "Payment Processing" and then show success
         setTimeout(() => {
             setStep('success');
         }, 3000);
@@ -135,10 +142,16 @@ const AppointmentModal = ({ isOpen, onClose }) => {
                                         <input
                                             required
                                             type="tel"
-                                            placeholder="+91 98765 43210"
+                                            maxLength={10}
+                                            placeholder="9876543210"
                                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-mint-dark/50 focus:border-mint-dark transition-all bg-slate-50/50"
                                             value={formData.contact}
-                                            onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                                            onChange={(e) => {
+                                                const value = e.target.value.replace(/\D/g, '');
+                                                if (value.length <= 10) {
+                                                    setFormData({ ...formData, contact: value });
+                                                }
+                                            }}
                                         />
                                     </div>
 
