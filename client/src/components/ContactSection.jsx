@@ -82,7 +82,7 @@ const ContactSection = () => {
                                     </div>
                                     <div>
                                         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">{item.label}</p>
-                                        <p className="text-xl font-bold text-slate-800 tracking-tight group-hover:text-slate-600 transition-colors">{item.content}</p>
+                                        <p className="text-lg md:text-xl font-semibold text-slate-800 tracking-tight group-hover:text-slate-600 transition-colors">{item.content}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -118,7 +118,7 @@ const ContactSection = () => {
                                     <form onSubmit={handleSubmit} className="space-y-6">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="space-y-2">
-                                                <label className="text-sm font-bold text-slate-700 ml-1">Full Name</label>
+                                                <label className="text-sm font-semibold text-slate-700 ml-1">Full Name</label>
                                                 <input 
                                                     required
                                                     type="text" 
@@ -129,7 +129,7 @@ const ContactSection = () => {
                                                 />
                                             </div>
                                             <div className="space-y-2">
-                                                <label className="text-sm font-bold text-slate-700 ml-1">Phone Number</label>
+                                                <label className="text-sm font-semibold text-slate-700 ml-1">Phone Number</label>
                                                 <input 
                                                     required
                                                     type="tel" 
@@ -142,7 +142,7 @@ const ContactSection = () => {
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
+                                            <label className="text-sm font-semibold text-slate-700 ml-1">Email Address</label>
                                             <input 
                                                 required
                                                 type="email" 
@@ -154,7 +154,7 @@ const ContactSection = () => {
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-slate-700 ml-1">Your Message</label>
+                                            <label className="text-sm font-semibold text-slate-700 ml-1">Your Message</label>
                                             <textarea 
                                                 required
                                                 rows="4"
