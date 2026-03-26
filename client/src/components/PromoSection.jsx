@@ -83,7 +83,7 @@ const PromoSection = ({ onOpenAppointment }) => {
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="absolute top-[60%] md:top-10 -right-4 md:-right-8 bg-white p-5 rounded-3xl shadow-xl border border-slate-50 max-w-[150px] md:max-w-[180px]"
+                            className="absolute top-[15%] md:top-10 -right-4 md:-right-8 bg-white p-4 md:p-5 rounded-3xl shadow-xl border border-slate-50 max-w-[130px] md:max-w-[180px] z-20"
                         >
                             <div className="flex items-center gap-3 mb-2">
                                 <div className="p-2 bg-mint rounded-lg text-mint-dark">
@@ -98,7 +98,7 @@ const PromoSection = ({ onOpenAppointment }) => {
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="absolute -bottom-6 -left-4 md:-left-8 bg-white p-5 rounded-3xl shadow-xl border border-slate-50 max-w-[200px]"
+                            className="absolute bottom-[5%] md:-bottom-6 -left-4 md:-left-8 bg-white p-4 md:p-5 rounded-3xl shadow-xl border border-slate-50 max-w-[150px] md:max-w-[200px] z-20"
                         >
                             <div className="flex items-center gap-3 mb-2">
                                 <div className="p-2 bg-rose rounded-lg text-rose-dark">
