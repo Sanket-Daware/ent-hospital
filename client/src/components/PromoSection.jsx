@@ -68,9 +68,13 @@ const PromoSection = ({ onOpenAppointment }) => {
                             className="aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl relative"
                         >
                              <img 
-                                src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=1000" 
-                                alt="Professional ENT Specialist" 
-                                className="w-full h-full object-cover"
+                                src="/images/doctor-sanket.png" 
+                                alt="Dr. Sanket Daware" 
+                                className="w-full h-full object-cover object-top"
+                                onError={(e) => {
+                                    e.target.src = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=1000";
+                                    e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                                }}
                             />
                         </motion.div>
 
