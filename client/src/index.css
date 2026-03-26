@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mint: #e8f5e9;
+  --color-mint-dark: #81c784;
+  --color-sky: #e3f2fd;
+  --color-sky-dark: #64b5f6;
+  --color-rose: #fce4ec;
+  --color-rose-dark: #f06292;
+  --color-comfort-white: #ffffff;
+  --color-comfort-gray: #f5f7fa;
+
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Poppins", sans-serif;
+  --font-accent: "Dancing Script", cursive;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-white text-slate-800;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
