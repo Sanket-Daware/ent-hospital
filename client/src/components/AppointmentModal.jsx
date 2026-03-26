@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, Loader2, CreditCard } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
-
-const BASE_URL = '/api';
-
 const reasons = [
     {
         id: 'ear',
@@ -53,34 +49,17 @@ const AppointmentModal = ({ isOpen, onClose }) => {
         reason: ''
     });
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
 
-        try {
-            // 1. Create appointment in backend
-            const response = await axios.post(`${BASE_URL}/appointments`, formData);
-            const { appointment } = response.data;
+        // 1. Show the "Processing Payment" screen
+        setStep('paying');
 
-            setStep('paying');
-
-            // 2. Simulate Razorpay payment processing
-            setTimeout(async () => {
-                try {
-                    await axios.post(`${BASE_URL}/appointments/verify-payment`, {
-                        appointmentId: appointment._id,
-                        paymentId: 'pay_' + Math.random().toString(36).substr(2, 9)
-                    });
-                    setStep('success');
-                } catch (err) {
-                    setError('Payment verification failed. Please try again.');
-                    setStep('form');
-                }
-            }, 2500);
-
-        } catch (err) {
-            setError('Failed to book appointment. Please check your connection.');
-        }
+        // 2. Simulate a delay for "Payment Processing" and then show success
+        setTimeout(() => {
+            setStep('success');
+        }, 3000);
     };
 
     const handleClose = () => {
