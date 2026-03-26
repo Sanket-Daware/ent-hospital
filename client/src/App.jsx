@@ -7,6 +7,8 @@ import ProblemsSection from './components/ProblemsSection';
 import SpecialtiesSection from './components/SpecialtiesSection';
 import PromoSection from './components/PromoSection';
 import GallerySection from './components/GallerySection';
+import ReviewsSection from './components/ReviewsSection';
+import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
 // Scroll to top on navigation component
@@ -25,6 +27,8 @@ const Home = ({ onOpenAppointment }) => (
     <PromoSection onOpenAppointment={onOpenAppointment} />
     <GallerySection />
     <SpecialtiesSection />
+    <ReviewsSection />
+    <ContactSection />
   </main>
 );
 
