@@ -47,7 +47,7 @@ const ContactSection = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 }}
-                                className="text-4xl md:text-6xl font-bold font-serif text-slate-800 tracking-tight leading-tight"
+                                className="text-3xl md:text-5xl font-bold font-serif text-slate-800 tracking-tight leading-tight"
                             >
                                 Have any questions? <br />
                                 <span className="text-sky-dark underline decoration-sky/30 underline-offset-8">We're here to help</span>
@@ -57,7 +57,7 @@ const ContactSection = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 }}
-                                className="mt-8 text-lg text-slate-500 font-sans leading-relaxed max-w-md"
+                                className="mt-8 text-slate-500 font-sans leading-relaxed max-w-md"
                             >
                                 Our team is ready to provide you with the information you need and schedule your specialized ENT consultation.
                             </motion.p>
@@ -82,7 +82,7 @@ const ContactSection = () => {
                                     </div>
                                     <div>
                                         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">{item.label}</p>
-                                        <p className="text-lg md:text-xl font-semibold text-slate-800 tracking-tight group-hover:text-slate-600 transition-colors">{item.content}</p>
+                                        <p className="text-base md:text-lg font-medium text-slate-800 tracking-tight group-hover:text-slate-600 transition-colors">{item.content}</p>
                                     </div>
                                 </motion.div>
                             ))}

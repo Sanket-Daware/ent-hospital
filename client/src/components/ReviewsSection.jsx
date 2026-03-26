@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 const reviews = [
     {
         id: 1,
-        name: "Sanket Daware",
+        name: "Atharv Athawale",
         role: "Patient",
-        content: "Dr. Sanket and the entire team at Suvidha ENT are incredibly professional. The specialized care I received for my sinus issue was life-changing. Highly recommended!",
+        content: "Dr. Swapnil and the entire team at Suvidha ENT are incredibly professional. The specialized care I received for my sinus issue was life-changing. Highly recommended!",
         rating: 5,
         color: "bg-sky-50"
     },
