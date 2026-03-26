@@ -5,6 +5,8 @@ import HeroSlider from './components/HeroSlider';
 import AppointmentModal from './components/AppointmentModal';
 import ProblemsSection from './components/ProblemsSection';
 import SpecialtiesSection from './components/SpecialtiesSection';
+import PromoSection from './components/PromoSection';
+import GallerySection from './components/GallerySection';
 import Footer from './components/Footer';
 
 // Scroll to top on navigation component
@@ -20,6 +22,8 @@ const Home = ({ onOpenAppointment }) => (
   <main>
     <HeroSlider />
     <ProblemsSection />
+    <PromoSection onOpenAppointment={onOpenAppointment} />
+    <GallerySection />
     <SpecialtiesSection />
   </main>
 );
@@ -138,7 +142,7 @@ const App = () => {
           <Route path="*" element={<Home onOpenAppointment={handleOpenModal} />} />
         </Routes>
 
-        <Footer />
+        <Footer onOpenAppointment={handleOpenModal} />
         <AppointmentModal isOpen={modalOpen} onClose={handleCloseModal} />
       </div>
     </Router>
