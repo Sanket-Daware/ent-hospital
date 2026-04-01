@@ -4,6 +4,12 @@ const cors = require('cors');
 require('dotenv').config();
 
 const appointmentRoutes = require('./routes/appointments');
+const contactRoutes = require('./routes/contact');
+const galleryRoutes = require('./routes/gallery');
+const blogRoutes = require('./routes/blogs');
+const testimonialRoutes = require('./routes/testimonials');
+const settingsRoutes = require('./routes/settings');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,7 +19,13 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/appointments', appointmentRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/gallery', galleryRoutes);
+app.use('/api/blogs', blogRoutes);
+app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/ent-hospital').then(() => {

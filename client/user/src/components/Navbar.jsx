@@ -17,8 +17,10 @@ const Navbar = ({ onOpenAppointment }) => {
 
     const navLinks = [
         { name: 'Home', path: '/' },
-        { name: 'Who we are', path: '/who-we-are' },
-        { name: 'Our Expertise', path: '/expertise' },
+        { name: 'About Us', path: '/about' },
+        { name: 'Happy Patients', path: '/happy-patients' },
+        { name: 'Gallery', path: '/gallery' },
+        { name: 'Blog', path: '/blogs' },
         { name: 'Contact US', path: '/contact' },
     ];
 

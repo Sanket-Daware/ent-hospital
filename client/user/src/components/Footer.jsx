@@ -111,9 +111,10 @@ const Footer = ({ onOpenAppointment }) => {
                         <ul className="space-y-4">
                             {[
                                 { name: 'Home', path: '/' }, 
-                                { name: 'Who we are', path: '/who-we-are' }, 
-                                { name: 'Our Expertise', path: '/our-expertise' }, 
-                                { name: 'Contact Us', path: '/contact-us' }
+                                { name: 'About Us', path: '/about' }, 
+                                { name: 'Happy Patients', path: '/happy-patients' }, 
+                                { name: 'Gallery', path: '/gallery' },
+                                { name: 'Contact Us', path: '/contact' }
                             ].map((item) => (
                                 <li key={item.name}>
                                     <Link to={item.path} className="text-slate-500 hover:text-slate-800 transition-colors text-sm font-sans font-medium">
@@ -129,12 +130,12 @@ const Footer = ({ onOpenAppointment }) => {
                         <h4 className="text-slate-800 font-bold mb-8">Our Specialties</h4>
                         <ul className="space-y-4">
                             {[
-                                { name: 'Ear Care', path: '/ear' }, 
-                                { name: 'Nose & Sinus', path: '/nose' }, 
-                                { name: 'Throat & Voice', path: '/throat' }, 
-                                { name: 'Head & Neck', path: '/head-neck' }, 
-                                { name: 'Pediatric ENT', path: '/pediatric' }, 
-                                { name: 'Sleep & Snoring', path: '/sleep' }
+                                { name: 'Ear Care', path: '/blogs?category=Ear' }, 
+                                { name: 'Nose & Sinus', path: '/blogs?category=Nose & Sinus' }, 
+                                { name: 'Throat & Voice', path: '/blogs?category=Throat & Voice' }, 
+                                { name: 'Head & Neck', path: '/blogs?category=Head & Neck' }, 
+                                { name: 'Pediatric ENT', path: '/blogs?category=Pediatric ENT' }, 
+                                { name: 'Sleep & Snoring', path: '/blogs?category=Sleep & Snoring' }
                             ].map((item) => (
                                 <li key={item.name}>
                                     <Link to={item.path} className="text-slate-500 hover:text-slate-800 transition-colors text-sm font-sans font-medium">

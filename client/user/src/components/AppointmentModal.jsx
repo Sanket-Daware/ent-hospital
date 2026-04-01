@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { X, CheckCircle2, Loader2, CreditCard } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
+
 const reasons = [
     {
         id: 'ear',
@@ -40,18 +42,54 @@ const reasons = [
 ];
 
 const AppointmentModal = ({ isOpen, onClose }) => {
-    const [step, setStep] = useState('form'); // form, paying, success
+    const [step, setStep] = useState('form'); // form, loading, success
     const [error, setError] = useState('');
+    const [availableSlots, setAvailableSlots] = useState([]);
+    const [isSlotsLoading, setIsSlotsLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         surname: '',
         contact: '',
-        reason: ''
+        reason: '',
+        appointmentDate: '',
+        timeSlot: ''
     });
 
-    const handleSubmit = (e) => {
+    // Fetch available slots when date changes
+    useEffect(() => {
+        const fetchSlots = async () => {
+            if (!formData.appointmentDate) return;
+            
+            setIsSlotsLoading(true);
+            setAvailableSlots([]);
+            setFormData(prev => ({ ...prev, timeSlot: '' })); // Reset time if date changes
+
+            try {
+                const res = await axios.get(`/api/appointments/available-slots?date=${formData.appointmentDate}`);
+                if (res.data.success) {
+                    setAvailableSlots(res.data.slots);
+                } else {
+                    setError(res.data.message || 'Failed to load slots');
+                }
+            } catch (err) {
+                console.error("Fetch slots error:", err);
+                setError('Could not fetch available slots. Please try another date.');
+            } finally {
+                setIsSlotsLoading(false);
+            }
+        };
+
+        fetchSlots();
+    }, [formData.appointmentDate]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+
+        if (!formData.appointmentDate || !formData.timeSlot) {
+            setError('Please select both a date and a time slot.');
+            return;
+        }
 
         // 1. Validate contact number (exactly 10 digits)
         const contactDigits = formData.contact.replace(/\D/g, '');
@@ -60,22 +98,32 @@ const AppointmentModal = ({ isOpen, onClose }) => {
             return;
         }
 
-        // 2. Show the "Processing Payment" screen
-        setStep('paying');
+        setStep('loading');
 
-        // 3. Simulate a delay for "Payment Processing" and then show success
-        setTimeout(() => {
-            setStep('success');
-        }, 3000);
+        try {
+            const response = await axios.post('/api/appointments', formData);
+            if (response.data.success) {
+                setStep('success');
+            } else {
+                setStep('form');
+                setError(response.data.message || 'Failed to book appointment.');
+            }
+        } catch (err) {
+            setStep('form');
+            setError(err.response?.data?.message || 'Something went wrong. Please try again.');
+        }
     };
 
     const handleClose = () => {
         setStep('form');
-        setFormData({ name: '', surname: '', contact: '', reason: '' });
+        setFormData({ name: '', surname: '', contact: '', reason: '', appointmentDate: '', timeSlot: '' });
         onClose();
     };
 
     if (!isOpen) return null;
+
+    // Get today's date in YYYY-MM-DD for min attribute
+    const todayStr = new Date().toISOString().split('T')[0];
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
@@ -143,7 +191,7 @@ const AppointmentModal = ({ isOpen, onClose }) => {
                                             required
                                             type="tel"
                                             maxLength={10}
-                                            placeholder="9876543210"
+                                            placeholder="Enter Your Contact Number"
                                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-mint-dark/50 focus:border-mint-dark transition-all bg-slate-50/50"
                                             value={formData.contact}
                                             onChange={(e) => {
@@ -172,31 +220,60 @@ const AppointmentModal = ({ isOpen, onClose }) => {
                                         </select>
                                     </div>
 
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="space-y-1.5">
+                                            <label className="text-sm font-medium text-slate-700 ml-1">Select Date</label>
+                                            <input
+                                                required
+                                                type="date"
+                                                min={todayStr}
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-mint-dark/50 focus:border-mint-dark transition-all bg-slate-50/50"
+                                                value={formData.appointmentDate}
+                                                onChange={(e) => setFormData({ ...formData, appointmentDate: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className="space-y-1.5">
+                                            <label className="text-sm font-medium text-slate-700 ml-1">Available Time</label>
+                                            <select
+                                                required
+                                                disabled={!formData.appointmentDate || isSlotsLoading}
+                                                className={`w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-mint-dark/50 focus:border-mint-dark transition-all bg-slate-50/50 appearance-none overflow-hidden ${(!formData.appointmentDate || isSlotsLoading) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                                value={formData.timeSlot}
+                                                onChange={(e) => setFormData({ ...formData, timeSlot: e.target.value })}
+                                            >
+                                                <option value="" disabled>
+                                                    {isSlotsLoading ? 'Loading...' : !formData.appointmentDate ? 'Pick a date' : 'Select time'}
+                                                </option>
+                                                {availableSlots.map((slot) => (
+                                                    <option key={slot} value={slot}>{slot}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+
                                     <button
                                         type="submit"
                                         className="w-full py-4 bg-mint-dark hover:bg-green-600 text-white rounded-xl font-semibold shadow-lg shadow-mint-dark/20 hover:shadow-mint-dark/40 transition-all transform hover:-translate-y-0.5 mt-4"
                                     >
-                                        Proceed to Payment (₹500)
+                                        Book Appointment Now
                                     </button>
                                 </form>
                             </motion.div>
                         )}
 
-                        {step === 'paying' && (
+                        {step === 'loading' && (
                             <motion.div
-                                key="paying"
+                                key="loading"
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
-                                className="py-12 flex flex-col items-center text-center"
+                                className="py-20 flex flex-col items-center text-center"
                             >
-                                <div className="w-20 h-20 bg-sky rounded-full flex items-center justify-center mb-6 relative">
-                                    <CreditCard className="text-sky-dark relative z-10" size={32} />
-                                    <Loader2 className="absolute inset-0 text-sky-dark animate-spin" size={80} strokeWidth={1.5} />
+                                <div className="w-20 h-20 bg-mint/10 rounded-full flex items-center justify-center mb-6 relative">
+                                    <Loader2 className="text-mint-dark animate-spin" size={48} strokeWidth={2} />
                                 </div>
-                                <h2 className="text-2xl font-bold text-slate-800 mb-2">Simulating Razorpay</h2>
-                                <p className="text-slate-500 mb-0">Processing your secure payment of ₹500...</p>
-                                <p className="text-xs text-slate-400 mt-4 italic font-accent text-lg">"Trust in our expert care"</p>
+                                <h2 className="text-2xl font-bold text-slate-800 mb-2">Processing...</h2>
+                                <p className="text-slate-500 mb-0">Scheduling your appointment with our ENT specialists.</p>
                             </motion.div>
                         )}
 
@@ -207,17 +284,17 @@ const AppointmentModal = ({ isOpen, onClose }) => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 className="py-12 flex flex-col items-center text-center"
                             >
-                                <div className="w-20 h-20 bg-mint rounded-full flex items-center justify-center mb-6">
-                                    <CheckCircle2 className="text-mint-dark" size={48} />
+                                <div className="w-24 h-24 bg-mint rounded-full flex items-center justify-center mb-8 shadow-2xl shadow-mint/20">
+                                    <CheckCircle2 className="text-mint-dark" size={56} />
                                 </div>
                                 <h2 className="text-3xl font-bold text-slate-800 mb-2">Appointment Booked!</h2>
-                                <p className="text-slate-600 mb-8 max-w-xs mx-auto">Thank you, {formData.name}. Your appointment for {formData.reason} has been confirmed. We've sent details to {formData.contact}.</p>
+                                <p className="text-slate-600 mb-6 max-w-xs mx-auto text-lg leading-relaxed">Thank you, {formData.name}. Your appointment for {formData.reason} on {new Date(formData.appointmentDate).toLocaleDateString()} at {formData.timeSlot} has been confirmed.</p>
 
                                 <button
                                     onClick={handleClose}
-                                    className="px-8 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-semibold transition-colors"
+                                    className="px-10 py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl font-bold shadow-xl shadow-slate-200 transition-all hover:scale-105"
                                 >
-                                    Enter Site
+                                    Return to Site
                                 </button>
                             </motion.div>
                         )}

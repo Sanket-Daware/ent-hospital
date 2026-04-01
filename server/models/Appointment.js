@@ -5,9 +5,9 @@ const appointmentSchema = new mongoose.Schema({
     surname: { type: String, required: true },
     contact: { type: String, required: true },
     reason: { type: String, required: true },
-    paymentId: { type: String }, // dummy Razorpay ID
-    paymentStatus: { type: String, default: 'pending' }, // 'pending', 'success'
-    amount: { type: Number, default: 500 },
+    appointmentDate: { type: Date, required: true },
+    timeSlot: { type: String, required: true },
+    status: { type: String, enum: ['pending', 'confirmed', 'cancelled'], default: 'pending' },
     createdAt: { type: Date, default: Date.now }
 });
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
 
 const ContactSection = () => {
-    const [status, setStatus] = useState('idle'); // idle, sending, success
+    const [status, setStatus] = useState('idle'); // idle, sending, success, error
+    const [errorMessage, setErrorMessage] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -11,16 +13,39 @@ const ContactSection = () => {
         message: ''
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('sending');
+        setErrorMessage('');
+
+        // Validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            setStatus('error');
+            setErrorMessage('Please enter a valid email address.');
+            return;
+        }
+
+        if (formData.phone.length !== 10) {
+            setStatus('error');
+            setErrorMessage('Please enter a valid 10-digit phone number.');
+            return;
+        }
         
-        // Simulating message sending
-        setTimeout(() => {
-            setStatus('success');
-            setFormData({ name: '', email: '', phone: '', message: '' });
-            setTimeout(() => setStatus('idle'), 5000);
-        }, 2000);
+        try {
+            const response = await axios.post('/api/contact', formData);
+            if (response.data.success) {
+                setStatus('success');
+                setFormData({ name: '', email: '', phone: '', message: '' });
+                setTimeout(() => setStatus('idle'), 5000);
+            } else {
+                setStatus('error');
+                setErrorMessage(response.data.message || 'Failed to send message.');
+            }
+        } catch (err) {
+            setStatus('error');
+            setErrorMessage(err.response?.data?.message || 'Something went wrong. Please try again.');
+        }
     };
 
     return (
@@ -116,6 +141,11 @@ const ContactSection = () => {
                                     exit={{ opacity: 0 }}
                                 >
                                     <form onSubmit={handleSubmit} className="space-y-6">
+                                        {status === 'error' && (
+                                            <div className="p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-sm italic">
+                                                {errorMessage}
+                                            </div>
+                                        )}
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="space-y-2">
                                                 <label className="text-sm font-medium text-slate-700 ml-1">Full Name</label>
@@ -133,9 +163,15 @@ const ContactSection = () => {
                                                 <input 
                                                     required
                                                     type="tel" 
+                                                    maxLength={10}
                                                     placeholder="10 digit number"
                                                     value={formData.phone}
-                                                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                                                    onChange={(e) => {
+                                                        const value = e.target.value.replace(/\D/g, '');
+                                                        if (value.length <= 10) {
+                                                            setFormData({...formData, phone: value});
+                                                        }
+                                                    }}
                                                     className="w-full px-6 py-4 rounded-2xl border border-slate-100 focus:outline-none focus:ring-4 focus:ring-mint-dark/5 focus:border-mint-dark transition-all bg-slate-50 placeholder:text-slate-400 font-medium"
                                                 />
                                             </div>
