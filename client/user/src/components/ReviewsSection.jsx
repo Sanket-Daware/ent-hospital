@@ -103,7 +103,7 @@ const ReviewsSection = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-5xl font-bold font-serif text-slate-800 tracking-tight leading-tight"
+                            className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight leading-tight"
                         >
                             What our patients <br />
                             <span className="text-mint-dark underline decoration-mint/30 underline-offset-8">say about us</span>
@@ -145,40 +145,40 @@ const ReviewsSection = () => {
                         <p className="text-slate-300 italic font-sans">No reviews yet. Be the first to share your experience!</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {reviews.slice(0, 3).map((review, index) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {reviews.slice(0, 4).map((review, index) => (
                             <motion.div
                                 key={review._id}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className={`p-10 rounded-[2.5rem] ${cardColors[index % cardColors.length]} relative group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-2`}
+                                className={`p-8 rounded-3xl ${cardColors[index % cardColors.length]} relative group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-1`}
                             >
-                                <div className="absolute top-8 right-10 text-slate-200 group-hover:text-slate-300 transition-colors">
-                                    <Quote size={48} strokeWidth={3} />
+                                <div className="absolute top-6 right-8 text-slate-200 group-hover:text-slate-300 transition-colors">
+                                    <Quote size={32} strokeWidth={3} />
                                 </div>
                                 
-                                <div className="flex text-amber-400 mb-6">
+                                <div className="flex text-amber-400 mb-4">
                                     {[...Array(review.rating)].map((_, i) => (
-                                        <Star key={i} size={18} fill="currentColor" />
+                                        <Star key={i} size={16} fill="currentColor" />
                                     ))}
                                 </div>
                                 
-                                <p className="text-slate-700 text-lg font-sans leading-relaxed mb-8 italic">
+                                <p className="text-slate-700 text-sm font-sans leading-relaxed mb-6 italic">
                                     "{review.content}"
                                 </p>
                                 
-                                <div className="flex items-center gap-4 mt-auto">
-                                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-slate-500 font-bold shadow-sm overflow-hidden">
+                                <div className="flex items-center gap-3 mt-auto">
+                                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-500 font-bold shadow-sm overflow-hidden text-xs">
                                         {review.patientImageUrl
                                             ? <img src={review.patientImageUrl} alt={review.patientName} className="w-full h-full object-cover" />
                                             : review.patientName.charAt(0).toUpperCase()
                                         }
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-slate-800 tracking-tight">{review.patientName}</h4>
-                                        <p className="text-xs text-slate-500 font-medium uppercase tracking-widest">
+                                        <h4 className="font-bold text-slate-800 tracking-tight text-sm">{review.patientName}</h4>
+                                        <p className="text-[10px] text-slate-500 font-medium uppercase tracking-widest">
                                             {review.treatment || 'Patient'}
                                         </p>
                                     </div>

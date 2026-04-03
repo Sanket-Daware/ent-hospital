@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Heart, Globe, MessageCircle, Camera, Plus, Zap } f
 
 const Footer = ({ onOpenAppointment }) => {
     return (
-        <footer className="bg-comfort-gray text-slate-800 pt-0 pb-10 overflow-hidden font-sans border-t border-slate-100">
+        <footer className="bg-[#F5F7FA] text-slate-800 pt-0 pb-10 overflow-hidden font-sans border-t border-slate-100 relative z-20">
             {/* Zone 1: Map */}
             <div className="w-full h-[300px] md:h-[400px] relative z-0">
                 <iframe
@@ -21,7 +21,7 @@ const Footer = ({ onOpenAppointment }) => {
 
             {/* Bump Content: Address & Hours (Overlapping Map) */}
             <div className="relative z-10 max-w-5xl mx-auto px-4 -mt-16 md:-mt-20">
-                <div className="bg-comfort-gray rounded-t-[2rem] md:rounded-t-[3rem] pt-8 md:pt-12 px-6 pb-2 w-full flex flex-col md:flex-row justify-center items-center gap-6 md:gap-24 shadow-[0_-15px_30px_rgba(0,0,0,0.03)]">
+                <div className="bg-[#F5F7FA] rounded-t-[2rem] md:rounded-t-[3rem] pt-8 md:pt-12 px-6 pb-2 w-full flex flex-col md:flex-row justify-center items-center gap-6 md:gap-24 shadow-[0_-15px_30px_rgba(0,0,0,0.03)]">
                     <div className="flex flex-col items-center">
                         <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-2">Address</span>
                         <p className="text-sm font-bold text-slate-700 text-center leading-relaxed">
@@ -40,7 +40,7 @@ const Footer = ({ onOpenAppointment }) => {
             </div>
 
             {/* Zone 2: Middle Layout (Phone, Logo, CTA) */}
-            <div className="bg-comfort-gray w-full">
+            <div className="bg-[#F5F7FA] w-full">
                 <div className="max-w-7xl mx-auto px-6 py-12 md:py-20 relative">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-10">
                         {/* Phone Number */}
@@ -125,20 +125,23 @@ const Footer = ({ onOpenAppointment }) => {
                         </ul>
                     </div>
 
-                    {/* Our Specialties */}
+                    {/* Our Blogs */}
                     <div className="col-span-1">
-                        <h4 className="text-slate-800 font-bold mb-8">Our Specialties</h4>
+                        <h4 className="text-slate-800 font-bold mb-8">Our Blogs</h4>
                         <ul className="space-y-4">
                             {[
-                                { name: 'Ear Care', path: '/blogs?category=Ear' }, 
-                                { name: 'Nose & Sinus', path: '/blogs?category=Nose & Sinus' }, 
-                                { name: 'Throat & Voice', path: '/blogs?category=Throat & Voice' }, 
-                                { name: 'Head & Neck', path: '/blogs?category=Head & Neck' }, 
-                                { name: 'Pediatric ENT', path: '/blogs?category=Pediatric ENT' }, 
-                                { name: 'Sleep & Snoring', path: '/blogs?category=Sleep & Snoring' }
+                                { name: 'Ear Care', category: 'Ear' }, 
+                                { name: 'Nose & Sinus', category: 'Nose & Sinus' }, 
+                                { name: 'Throat & Voice', category: 'Throat & Voice' }, 
+                                { name: 'Head & Neck', category: 'Head & Neck' }, 
+                                { name: 'Pediatric ENT', category: 'Pediatric ENT' }, 
+                                { name: 'Sleep & Snoring', category: 'Sleep & Snoring' }
                             ].map((item) => (
                                 <li key={item.name}>
-                                    <Link to={item.path} className="text-slate-500 hover:text-slate-800 transition-colors text-sm font-sans font-medium">
+                                    <Link 
+                                        to={`/blogs?category=${encodeURIComponent(item.category)}`} 
+                                        className="text-slate-500 hover:text-slate-800 transition-colors text-sm font-sans font-medium"
+                                    >
                                         {item.name}
                                     </Link>
                                 </li>

@@ -5,7 +5,7 @@ import HeroSlider from './components/HeroSlider';
 import AppointmentModal from './components/AppointmentModal';
 import ProblemsSection from './components/ProblemsSection';
 import SpecialtiesSection from './components/SpecialtiesSection';
-import PromoSection from './components/PromoSection';
+import DoctorSection from './components/DoctorSection';
 import GallerySection from './components/GallerySection';
 import ReviewsSection from './components/ReviewsSection';
 import ContactSection from './components/ContactSection';
@@ -70,7 +70,7 @@ const Home = ({ onOpenAppointment }) => (
   <main>
     <HeroSlider />
     <ProblemsSection />
-    <PromoSection onOpenAppointment={onOpenAppointment} />
+    <DoctorSection onOpenAppointment={onOpenAppointment} />
     <GallerySection />
     <SpecialtiesSection />
     <ReviewsSection />

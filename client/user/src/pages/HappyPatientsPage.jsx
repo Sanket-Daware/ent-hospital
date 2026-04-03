@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Quote, Heart, MessageCircle, FastForward, PlayCircle, X, Loader2, CheckCircle2, PenLine, Filter, Search } from 'lucide-react';
+import { Star, Quote, Heart, MessageCircle, FastForward, PlayCircle, X, Loader2, CheckCircle2, PenLine, Filter, Search, Waves, Wind, Mic } from 'lucide-react';
 import axios from 'axios';
 import AppointmentModal from '../components/AppointmentModal';
 
@@ -94,6 +94,13 @@ const HappyPatientsPage = () => {
         return matchesStar && matchesKeyword;
     });
 
+    const filterTypes = [
+        { label: 'All', icon: Filter },
+        { label: 'Ear', icon: Waves },
+        { label: 'Nose', icon: Wind },
+        { label: 'Throat', icon: Mic }
+    ];
+
     return (
         <div className="pt-10 min-h-screen relative bg-slate-50 font-sans selection:bg-mint-dark selection:text-white">
             <div 
@@ -107,20 +114,20 @@ const HappyPatientsPage = () => {
             />
             <div className="relative z-10 min-h-screen">
                 {/* Hero Section */}
-                <section className="py-24 relative overflow-hidden">
+                <section className="pt-20 pb-10 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-sky/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
                     <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
                         <motion.span
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-mint-dark font-accent text-xl mb-4 block"
+                            className="text-mint-dark font-accent text-lg mb-2 block"
                         >
                             Success Stories
                         </motion.span>
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-7xl md:text-5xl font-bold font-serif text-slate-800 tracking-tight leading-tight mb-8"
+                            className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight leading-tight mb-4"
                         >
                             Voices of <br />
                             <span className="text-mint-dark underline decoration-mint/20 underline-offset-8">Our Patients</span>
@@ -129,52 +136,71 @@ const HappyPatientsPage = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-xl text-slate-500 max-w-2xl mx-auto font-sans leading-relaxed"
+                            className="text-sm text-slate-500 max-w-lg mx-auto font-sans leading-relaxed"
                         >
                             Join the community of over 50,000 satisfied patients who have found specialized care and healing with us.
                         </motion.p>
                     </div>
                 </section>
 
-                {/* Filter Section */}
-                <section className="pb-12">
-                    <div className="max-w-7xl mx-auto px-6">
-                        <div className="flex flex-wrap items-center justify-center gap-6 bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-100">
-                            {/* Star Filter */}
-                            <div className="flex items-center gap-3">
-                                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Stars:</span>
-                                <div className="flex bg-slate-50 p-1 rounded-xl">
+                {/* Styled Filter Section */}
+                <section className="pb-6 relative">
+                    <div className="max-w-4xl mx-auto px-6">
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 p-3 md:p-2.5 rounded-[2.5rem] bg-white/70 backdrop-blur-xl border border-white/50 shadow-2xl shadow-slate-200/40">
+                            {/* Star Filter Group */}
+                            <div className="flex flex-col items-center gap-2">
+                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Rating Filters</span>
+                                <div className="flex bg-slate-100/50 p-1 rounded-2xl relative">
                                     {[0, 5, 4, 3, 2, 1].map((star) => (
                                         <button
                                             key={star}
                                             onClick={() => setStarFilter(star)}
-                                            className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all ${
+                                            className={`relative px-4 py-1.5 rounded-xl text-[11px] font-bold transition-all duration-500 z-10 flex items-center gap-1.5 ${
                                                 starFilter === star 
-                                                ? 'bg-slate-900 text-white shadow-md' 
-                                                : 'text-slate-500 hover:text-slate-800'
+                                                ? 'text-white' 
+                                                : 'text-slate-500 hover:text-slate-900'
                                             }`}
                                         >
-                                            {star === 0 ? 'All' : `${star}★`}
+                                            {starFilter === star && (
+                                                <motion.div 
+                                                    layoutId="active-star"
+                                                    className="absolute inset-0 bg-slate-900 rounded-xl shadow-lg z-0"
+                                                    transition={{ type: 'spring', bounce: 0.25, duration: 0.6 }}
+                                                />
+                                            )}
+                                            <span className="relative z-10">{star === 0 ? 'All' : star}</span>
+                                            {star !== 0 && <Star size={10} className={`relative z-10 ${starFilter === star ? 'fill-amber-400 text-amber-400' : 'text-slate-300'}`} />}
                                         </button>
                                     ))}
                                 </div>
                             </div>
 
-                            {/* Keyword Filter */}
-                            <div className="flex items-center gap-3">
-                                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Type:</span>
-                                <div className="flex bg-slate-50 p-1 rounded-xl">
-                                    {['All', 'Ear', 'Nose', 'Throat'].map((type) => (
+                            {/* Divider (Desktop Only) */}
+                            <div className="hidden md:block w-px h-8 bg-slate-200/50" />
+
+                            {/* Keyword/Type Filter Group */}
+                            <div className="flex flex-col items-center gap-2">
+                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Clinical Specialties</span>
+                                <div className="flex bg-slate-100/50 p-1 rounded-2xl relative">
+                                    {filterTypes.map((type) => (
                                         <button
-                                            key={type}
-                                            onClick={() => setKeywordFilter(type)}
-                                            className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all ${
-                                                keywordFilter === type 
-                                                ? 'bg-slate-900 text-white shadow-md' 
-                                                : 'text-slate-500 hover:text-slate-800'
+                                            key={type.label}
+                                            onClick={() => setKeywordFilter(type.label)}
+                                            className={`relative px-5 py-1.5 rounded-xl text-[11px] font-bold transition-all duration-500 z-10 flex items-center gap-2 ${
+                                                keywordFilter === type.label 
+                                                ? 'text-white' 
+                                                : 'text-slate-500 hover:text-slate-900'
                                             }`}
                                         >
-                                            {type}
+                                            {keywordFilter === type.label && (
+                                                <motion.div 
+                                                    layoutId="active-type"
+                                                    className="absolute inset-0 bg-slate-900 rounded-xl shadow-lg z-0"
+                                                    transition={{ type: 'spring', bounce: 0.25, duration: 0.6 }}
+                                                />
+                                            )}
+                                            <type.icon size={13} className={`relative z-10 transition-transform ${keywordFilter === type.label ? 'scale-110' : 'text-slate-300 opacity-60'}`} />
+                                            <span className="relative z-10 tracking-tight">{type.label}</span>
                                         </button>
                                     ))}
                                 </div>
@@ -184,7 +210,7 @@ const HappyPatientsPage = () => {
                 </section>
 
                 {/* Testimonials Grid */}
-                <section className="py-12">
+                <section className="py-6">
                     <div className="max-w-7xl mx-auto px-6">
                         {isLoading ? (
                             <div className="flex justify-center py-20">
@@ -206,7 +232,7 @@ const HappyPatientsPage = () => {
                                 </button>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {filteredReviews.map((review, i) => (
                                     <motion.div
                                         key={review._id}
@@ -214,36 +240,36 @@ const HappyPatientsPage = () => {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.1 }}
-                                        className={`p-10 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group flex flex-col items-center text-center ${cardColors[i % cardColors.length]}`}
+                                        className={`p-8 rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 group flex flex-col items-center text-center ${cardColors[i % cardColors.length]}`}
                                     >
-                                        <div className="mb-8 relative">
-                                            <div className="w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg group-hover:scale-105 transition-transform duration-500 bg-white flex items-center justify-center">
+                                        <div className="mb-6 relative">
+                                            <div className="w-14 h-14 rounded-full border-2 border-white overflow-hidden shadow-lg group-hover:scale-105 transition-transform duration-500 bg-white flex items-center justify-center">
                                                 {review.patientImageUrl ? (
                                                     <img src={review.patientImageUrl} alt={review.patientName} className="w-full h-full object-cover" />
                                                 ) : (
-                                                    <span className="text-3xl font-bold text-slate-400 font-serif">
+                                                    <span className="text-xl font-bold text-slate-400 font-sans">
                                                         {review.patientName.charAt(0).toUpperCase()}
                                                     </span>
                                                 )}
                                             </div>
-                                            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white px-3 py-1 rounded-full shadow-sm">
+                                            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white px-2 py-0.5 rounded-full shadow-sm">
                                                 <div className="flex text-amber-400">
                                                     {[...Array(review.rating)].map((_, i) => (
-                                                        <Star key={i} size={12} fill="currentColor" />
+                                                        <Star key={i} size={10} fill="currentColor" />
                                                     ))}
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <Quote className="text-slate-200 mb-6 group-hover:scale-110 transition-transform duration-500" size={48} strokeWidth={3} />
+                                        <Quote className="text-slate-200 mb-4 group-hover:scale-110 transition-transform duration-500" size={32} strokeWidth={3} />
 
-                                        <p className="text-slate-700 text-lg font-sans leading-relaxed mb-8 italic">
+                                        <p className="text-slate-700 text-sm font-sans leading-relaxed mb-6 italic">
                                             "{review.content}"
                                         </p>
 
                                         <div className="mt-auto">
-                                            <h4 className="font-bold text-slate-800 tracking-tight text-xl">{review.patientName}</h4>
-                                            <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">
+                                            <h4 className="font-bold text-slate-800 tracking-tight text-base">{review.patientName}</h4>
+                                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">
                                                 {review.treatment || 'Verified Patient'}
                                             </p>
                                         </div>
@@ -257,8 +283,8 @@ const HappyPatientsPage = () => {
                 {/* Call to Action */}
                 <section className="py-12 bg-mint/20 mb-24 rounded-[3rem] mx-6">
                     <div className="max-w-3xl mx-auto px-4 text-center">
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6 font-serif">Ready to Experience <br /> the Suvidha Difference?</h2>
-                        <p className="text-slate-500 text-xl font-sans mb-12 max-w-2xl mx-auto leading-relaxed">
+                        <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4">Ready to Experience <br /> the Suvidha Difference?</h2>
+                        <p className="text-slate-500 text-sm font-sans mb-8 max-w-lg mx-auto leading-relaxed">
                             Our specialists are here to provide the same exceptional level of care to you and your loved ones.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

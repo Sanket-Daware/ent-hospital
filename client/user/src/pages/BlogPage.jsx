@@ -5,12 +5,11 @@ import { Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
 const BlogPage = () => {
-    const [searchParams] = useSearchParams();
-    const initialCategory = searchParams.get('category') || 'All';
+    const [searchParams, setSearchParams] = useSearchParams();
+    const activeCategory = searchParams.get('category') || 'All';
     
     const [blogs, setBlogs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [activeCategory, setActiveCategory] = useState(initialCategory);
 
     const categories = ['All', 'Ear', 'Nose & Sinus', 'Throat & Voice', 'Head & Neck', 'Pediatric ENT', 'Sleep & Snoring', 'General'];
 
@@ -44,7 +43,7 @@ const BlogPage = () => {
                     <motion.span 
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-sky-dark font-accent text-xl mb-4 block"
+                        className="text-sky-dark font-accent text-base mb-3 block"
                     >
                         Health & Wellness
                     </motion.span>
@@ -52,7 +51,7 @@ const BlogPage = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-6xl font-bold text-slate-800 mb-8 font-serif tracking-tight"
+                        className="text-3xl md:text-4xl font-bold text-slate-800 mb-6 font-serif tracking-tight"
                     >
                         Expert medical <br />
                         <span className="text-sky-dark underline decoration-sky/20 underline-offset-8">Information & Advice</span>
@@ -61,7 +60,7 @@ const BlogPage = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed"
+                        className="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed"
                     >
                         Stay informed with the latest research, treatment options, and tips for your ENT health from our specialty doctors.
                     </motion.p>
@@ -73,7 +72,7 @@ const BlogPage = () => {
                         {categories.map((cat) => (
                             <button
                                 key={cat}
-                                onClick={() => setActiveCategory(cat)}
+                                onClick={() => setSearchParams({ category: cat })}
                                 className={`px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-sm ${
                                     activeCategory === cat 
                                     ? 'bg-slate-800 text-white translate-y-[-2px] shadow-lg shadow-slate-200' 

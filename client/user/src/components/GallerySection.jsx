@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ZoomIn, Info, Loader2 } from 'lucide-react';
+import { X, Info, Loader2, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import GalleryCard, { getGridSize } from './GalleryCard';
 
 const GallerySection = () => {
     const [selectedImg, setSelectedImg] = useState(null);
@@ -13,7 +15,7 @@ const GallerySection = () => {
             try {
                 const res = await axios.get('/api/gallery');
                 if (res.data.success) {
-                    setItems(res.data.items.slice(0, 6)); // Show latest 6
+                    setItems(res.data.items.slice(0, 10)); // Show latest 10
                 }
             } catch (err) {
                 console.error("Gallery section fetch error:", err);
@@ -24,45 +26,20 @@ const GallerySection = () => {
         fetchLatest();
     }, []);
 
-    const itemVariants = {
-        hidden: (i) => ({
-            opacity: 0,
-            y: 20
-        }),
-        visible: (i) => ({
-            opacity: 1,
-            y: 0,
-            transition: {
-                type: "spring",
-                stiffness: 70,
-                damping: 15,
-                delay: i * 0.05
-            }
-        })
-    };
-
-    // Helper to determine bento grid size
-    const getGridSize = (index) => {
-        const patterns = [
-            'md:col-span-2 md:row-span-1',
-            'md:col-span-1 md:row-span-2',
-            'md:col-span-1 md:row-span-1',
-            'md:col-span-1 md:row-span-1',
-            'md:col-span-1 md:row-span-1',
-            'md:col-span-1 md:row-span-1'
-        ];
-        return patterns[index % patterns.length];
-    };
-
     return (
         <section className="py-24 bg-white relative overflow-hidden">
+            {/* Google Fonts for card titles */}
+            <style>
+                {`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap');`}
+            </style>
+
             <div className="max-w-7xl mx-auto px-6">
                 {/* Header */}
                 <div className="text-center mb-16">
                     <motion.span 
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        className="text-sky-dark font-accent text-2xl mb-2 block"
+                        className="text-sky-dark font-accent text-lg mb-2 block"
                     >
                         Virtual Tour
                     </motion.span>
@@ -70,7 +47,7 @@ const GallerySection = () => {
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-bold text-slate-800 mb-6"
+                        className="text-2xl md:text-3xl font-bold text-slate-800 mb-4"
                     >
                         Take a Closer Look
                     </motion.h2>
@@ -78,13 +55,13 @@ const GallerySection = () => {
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-slate-500 max-w-2xl mx-auto text-lg"
+                        className="text-slate-500 max-w-lg mx-auto text-sm"
                     >
                         Experience our world-class facilities and advanced medical technology.
                     </motion.p>
                 </div>
 
-                {/* Grid */}
+                {/* Bento Grid */}
                 {isLoading ? (
                     <div className="py-20 flex justify-center">
                         <Loader2 className="animate-spin text-slate-200" size={48} />
@@ -94,43 +71,38 @@ const GallerySection = () => {
                         <p className="text-slate-400 italic">No facility images uploaded yet.</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px] lg:auto-rows-[300px]">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[220px] lg:auto-rows-[260px]">
                         {items.map((img, i) => (
-                            <motion.div
+                            <GalleryCard
                                 key={img._id}
-                                variants={itemVariants}
-                                custom={i}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true, margin: "-20px" }}
-                                onClick={() => setSelectedImg(img)}
-                                className={`group relative rounded-[2rem] overflow-hidden cursor-pointer shadow-xl shadow-slate-200/50 ${getGridSize(i)}`}
-                            >
-                                <img 
-                                    src={img.mediaUrl} 
-                                    alt={img.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                
-                                {/* Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex flex-col justify-end p-8">
-                                    <h3 className="text-white text-xl font-bold mb-1">{img?.title || "Health Facility"}</h3>
-                                    <p className="text-white/70 text-sm font-sans line-clamp-2">{img?.description || "Specialized ENT Care Facility"}</p>
-                                </div>
-
-                                {/* Icons */}
-                                <div className="absolute top-6 right-6">
-                                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform delay-75 duration-300">
-                                        <ZoomIn size={18} />
-                                    </div>
-                                </div>
-                            </motion.div>
+                                item={img}
+                                index={i}
+                                onClick={(item) => setSelectedImg(item)}
+                            />
                         ))}
                     </div>
                 )}
+
+                {/* View Full Gallery Button */}
+                {!isLoading && items.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="text-center mt-14"
+                    >
+                        <Link
+                            to="/gallery"
+                            className="inline-flex items-center gap-2.5 px-8 py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl text-sm font-bold shadow-xl shadow-slate-200 transition-all hover:-translate-y-1 active:scale-95"
+                        >
+                            View Full Gallery
+                            <ArrowRight size={18} />
+                        </Link>
+                    </motion.div>
+                )}
             </div>
 
-            {/* Simple Lightbox */}
+            {/* Lightbox */}
             <AnimatePresence>
                 {selectedImg && (
                     <motion.div 

@@ -43,8 +43,9 @@ const HeroSlider = () => {
     const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
     return (
-        <div className="relative h-[85vh] w-full overflow-hidden bg-rose">
+        <div className="relative h-screen w-full overflow-hidden bg-rose">
             <AnimatePresence>
+
                 <motion.div
                     key={current}
                     initial={{ opacity: 0, scale: 1.05 }}
@@ -62,23 +63,23 @@ const HeroSlider = () => {
                     </div>
 
                     {/* Content */}
-                    <div className="relative h-full max-w-7xl mx-auto px-6 flex items-center">
-                        <div className="max-w-2xl">
+                    <div className="relative h-full max-w-[94%] mx-auto px-4 flex items-center">
+                        <div className="max-w-xl">
                             <motion.div
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5, duration: 0.8 }}
+                                initial={{ opacity: 0, x: -30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
                             >
-                                <span className={`inline-block px-4 py-1.5 rounded-full ${slides[current].color} text-slate-700 text-xs font-bold uppercase tracking-widest mb-6 font-sans`}>
+                                <span className={`inline-block px-3 py-1 rounded-full ${slides[current].color} text-slate-800 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 font-sans shadow-sm`}>
                                     {slides[current].accent}
                                 </span>
-                                <h1 className="text-5xl md:text-7xl font-bold font-serif text-slate-800 leading-tight mb-6">
+                                <h1 className="text-2xl md:text-3xl lg:text-4xl font-light font-sans text-slate-900 leading-[1.2] mb-5 drop-shadow-sm tracking-tight capitalize">
                                     {slides[current].title}
                                 </h1>
-                                <p className="text-lg md:text-xl text-slate-600 font-sans leading-relaxed mb-10 max-w-xl">
+                                <p className="text-[16px] md:text-lg text-slate-700 font-sans leading-relaxed mb-8 max-w-md font-medium opacity-90 drop-shadow-sm">
                                     {slides[current].subtitle}
                                 </p>
-                                <button className="px-8 py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl font-semibold shadow-xl shadow-slate-200 transition-all hover:-translate-y-1">
+                                <button className="px-7 py-3 bg-slate-900 hover:bg-black text-white rounded-md text-[13px] font-bold shadow-xl shadow-slate-300 transition-all hover:-translate-y-0.5 active:scale-95">
                                     Discover Our Services
                                 </button>
                             </motion.div>
@@ -86,6 +87,10 @@ const HeroSlider = () => {
                     </div>
                 </motion.div>
             </AnimatePresence>
+
+
+
+
 
             {/* Navigation Controls */}
             <div className="absolute bottom-10 right-10 flex gap-4 z-10">
