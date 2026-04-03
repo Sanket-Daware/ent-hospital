@@ -64,7 +64,7 @@ const HeroSlider = () => {
 
                     {/* Content */}
                     <div className="relative h-full max-w-[94%] mx-auto px-4 flex items-center">
-                        <div className="max-w-xl">
+                        <div className="max-w-2xl">
                             <motion.div
                                 initial={{ opacity: 0, x: -30 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -73,7 +73,7 @@ const HeroSlider = () => {
                                 <span className={`inline-block px-3 py-1 rounded-full ${slides[current].color} text-slate-800 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 font-sans shadow-sm`}>
                                     {slides[current].accent}
                                 </span>
-                                <h1 className="text-2xl md:text-3xl lg:text-4xl font-light font-sans text-slate-900 leading-[1.2] mb-5 drop-shadow-sm tracking-tight capitalize">
+                                <h1 className="text-3xl md:text-4xl lg:text-5xl font-light font-sans text-slate-900 leading-[1.2] mb-5 drop-shadow-sm tracking-tight capitalize">
                                     {slides[current].title}
                                 </h1>
                                 <p className="text-[16px] md:text-lg text-slate-700 font-sans leading-relaxed mb-8 max-w-md font-medium opacity-90 drop-shadow-sm">

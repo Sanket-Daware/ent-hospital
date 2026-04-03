@@ -4,7 +4,7 @@ import { Plus, Minus, ChevronDown } from 'lucide-react';
 import { whyChooseUsData } from '../../data/aboutData';
 
 const WhyChooseUs = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(-1);
 
     return (
         <section className="py-24 relative overflow-hidden">
