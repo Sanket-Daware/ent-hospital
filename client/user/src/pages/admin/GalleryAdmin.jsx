@@ -140,12 +140,12 @@ const GalleryAdmin = () => {
         <div className="space-y-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-800 tracking-tight mb-2">Gallery Management</h1>
-                    <p className="text-slate-500 font-sans">Upload photos to Cloudinary. Images will be auto-compressed.</p>
+                    <h1 className="text-2xl font-semibold text-slate-800 tracking-tight mb-1">Gallery Management</h1>
+                    <p className="text-[13px] text-slate-500 font-sans">Upload photos to Cloudinary. Images will be auto-compressed.</p>
                 </div>
                 <button 
                     onClick={() => setIsUploadModalOpen(true)}
-                    className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-slate-800 transition-all shadow-lg active:scale-95"
+                    className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl font-medium text-[13px] hover:bg-slate-800 transition-all shadow-lg active:scale-95"
                 >
                     <Plus size={18} />
                     <span>Upload Media</span>
@@ -158,7 +158,7 @@ const GalleryAdmin = () => {
                     <button
                         key={cat}
                         onClick={() => setActiveFilter(cat)}
-                        className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                        className={`px-4 py-2 rounded-xl text-[11px] font-semibold transition-all whitespace-nowrap ${
                             activeFilter === cat 
                             ? 'bg-sky-dark text-white shadow-md' 
                             : 'bg-white text-slate-400 border border-slate-100 hover:border-slate-200'
@@ -209,17 +209,17 @@ const GalleryAdmin = () => {
                                     </button>
                                 </div>
                                 <div className="absolute bottom-4 left-4">
-                                    <span className="px-3 py-1 bg-white/80 backdrop-blur-md text-slate-800 text-[10px] font-bold uppercase tracking-widest rounded-lg">
+                                    <span className="px-3 py-1 bg-white/80 backdrop-blur-md text-slate-800 text-[10px] font-medium uppercase tracking-widest rounded-lg">
                                         {item.category}
                                     </span>
                                 </div>
                             </div>
                             <div className="p-6">
                                 <div className="flex justify-between items-start mb-1">
-                                    <h3 className="font-bold text-slate-800 line-clamp-1">{item.title || "Untitled"}</h3>
-                                    <span className="text-[10px] bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full">Order: {item.displayOrder}</span>
+                                    <h3 className="font-semibold text-slate-800 text-[14px] line-clamp-1">{item.title || "Untitled"}</h3>
+                                    <span className="text-[10px] font-medium bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full">Order: {item.displayOrder}</span>
                                 </div>
-                                <p className="text-sm text-slate-400 font-sans line-clamp-2">{item.description || "No description."}</p>
+                                <p className="text-[12px] text-slate-400 font-sans line-clamp-2">{item.description || "No description."}</p>
                             </div>
                         </motion.div>
                     ))}
@@ -244,7 +244,7 @@ const GalleryAdmin = () => {
                             onClick={e => e.stopPropagation()}
                         >
                             <div className="p-8 border-b border-slate-50 flex items-center justify-between">
-                                <h2 className="text-2xl font-bold text-slate-800">{editingItem ? 'Edit Media' : 'Upload New Media'}</h2>
+                                <h2 className="text-xl font-semibold text-slate-800">{editingItem ? 'Edit Media' : 'Upload New Media'}</h2>
                                 <button onClick={closeModal} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
                                     <X size={24} />
                                 </button>
@@ -270,15 +270,15 @@ const GalleryAdmin = () => {
                                                 <div className="w-full h-full absolute inset-0">
                                                     <img src={previewUrl} className="w-full h-full object-cover opacity-30" alt="Preview" />
                                                     <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-                                                        <p className="font-bold text-slate-800 text-sm">{selectedFile?.name || "Image Preview"}</p>
-                                                        <p className="text-xs text-slate-400 mt-1">Click to change</p>
+                                                        <p className="font-semibold text-slate-800 text-[13px]">{selectedFile?.name || "Image Preview"}</p>
+                                                        <p className="text-[11px] text-slate-400 mt-1">Click to change</p>
                                                     </div>
                                                 </div>
                                             ) : (
                                                 <div className="flex flex-col items-center">
                                                     <Upload className="text-slate-300 mb-4" size={40} />
-                                                    <p className="text-sm font-bold text-slate-500">Tap to select image</p>
-                                                    <p className="text-xs text-slate-400 mt-1">Images only (Auto-compressed)</p>
+                                                    <p className="text-[13px] font-semibold text-slate-500">Tap to select image</p>
+                                                    <p className="text-[11px] text-slate-400 mt-1">Images only (Auto-compressed)</p>
                                                 </div>
                                             )}
                                         </div>
@@ -288,7 +288,7 @@ const GalleryAdmin = () => {
                                 <div className="space-y-4">
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="space-y-1">
-                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Category</label>
+                                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Category</label>
                                             <select 
                                                 className="w-full px-4 py-3 rounded-xl border border-slate-100 bg-slate-50 outline-none focus:border-sky font-medium"
                                                 value={uploadData.category}
@@ -300,7 +300,7 @@ const GalleryAdmin = () => {
                                             </select>
                                         </div>
                                         <div className="space-y-1">
-                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Display Order</label>
+                                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Display Order</label>
                                             <input 
                                                 type="number"
                                                 className="w-full px-4 py-3 rounded-xl border border-slate-100 bg-slate-50 outline-none focus:border-sky font-medium"
@@ -311,7 +311,7 @@ const GalleryAdmin = () => {
                                     </div>
 
                                     <div className="space-y-1">
-                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Title</label>
+                                        <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Title</label>
                                         <input 
                                             placeholder="Enter media title..."
                                             className="w-full px-4 py-3 rounded-xl border border-slate-100 bg-slate-50 outline-none focus:border-sky font-medium"
@@ -321,7 +321,7 @@ const GalleryAdmin = () => {
                                     </div>
 
                                     <div className="space-y-1">
-                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Description</label>
+                                        <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Description</label>
                                         <textarea 
                                             rows="3"
                                             placeholder="Enter brief description..."
@@ -335,7 +335,7 @@ const GalleryAdmin = () => {
                                 <button 
                                     disabled={(!selectedFile && !editingItem) || isUploading}
                                     type="submit"
-                                    className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-all disabled:opacity-50 shadow-xl shadow-slate-200"
+                                    className="w-full py-4 bg-slate-900 text-white rounded-2xl font-medium flex items-center justify-center gap-2 hover:bg-slate-800 transition-all disabled:opacity-50 shadow-xl shadow-slate-200"
                                 >
                                     {isUploading ? (
                                         <>

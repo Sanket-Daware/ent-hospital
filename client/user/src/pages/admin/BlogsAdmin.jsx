@@ -153,12 +153,12 @@ const BlogsAdmin = () => {
         <div className="space-y-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-800 tracking-tight mb-2">Blogs & Articles</h1>
-                    <p className="text-slate-500 font-sans">Manage specialty content for patients. Images are auto-compressed.</p>
+                    <h1 className="text-2xl font-semibold text-slate-800 tracking-tight mb-1">Blogs & Articles</h1>
+                    <p className="text-[13px] text-slate-500 font-sans">Manage specialty content for patients. Images are auto-compressed.</p>
                 </div>
                 <button 
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-slate-800 transition-all shadow-lg active:scale-95"
+                    className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl font-medium text-[13px] hover:bg-slate-800 transition-all shadow-lg active:scale-95"
                 >
                     <Plus size={18} />
                     <span>Create New Post</span>
@@ -171,7 +171,7 @@ const BlogsAdmin = () => {
                     <button
                         key={cat}
                         onClick={() => setActiveFilter(cat)}
-                        className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                        className={`px-4 py-2 rounded-xl text-[11px] font-semibold transition-all whitespace-nowrap ${
                             activeFilter === cat 
                             ? 'bg-sky-dark text-white shadow-md' 
                             : 'bg-white text-slate-400 border border-slate-100 hover:border-slate-200'
@@ -201,7 +201,7 @@ const BlogsAdmin = () => {
                             className="bg-white p-6 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-white flex flex-col md:flex-row gap-8 hover:shadow-2xl transition-all duration-500 group relative"
                         >
                             {!blog.isPublished && (
-                                <div className="absolute top-6 left-6 z-10 bg-slate-800/80 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 shadow-lg">
+                                <div className="absolute top-6 left-6 z-10 bg-slate-800/80 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-medium uppercase tracking-widest flex items-center gap-1.5 shadow-lg">
                                     <EyeOff size={12} /> Draft
                                 </div>
                             )}
@@ -215,23 +215,23 @@ const BlogsAdmin = () => {
                                 )}
                             </div>
                             <div className="flex-1 space-y-4">
-                                <div className="flex items-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                <div className="flex items-center gap-4 text-[10px] font-medium text-slate-400 uppercase tracking-widest">
                                     <div className="flex items-center gap-1.5"><Calendar size={12} /> {new Date(blog.publishedDate).toLocaleDateString()}</div>
                                     <div className="flex items-center gap-1.5"><User size={12} /> {blog.author}</div>
                                     <div className="px-2 py-0.5 bg-sky/20 text-sky-dark rounded-md">{blog.category}</div>
                                 </div>
-                                <h3 className="text-2xl font-bold text-slate-800 leading-tight group-hover:text-sky-dark transition-colors">{blog?.title || "Untitled Article"}</h3>
-                                <p className="text-slate-500 font-sans line-clamp-2 leading-relaxed">{blog?.excerpt || blog?.content?.substring(0, 150) || "No content available."}</p>
+                                <h3 className="text-xl font-semibold text-slate-800 leading-tight group-hover:text-sky-dark transition-colors">{blog?.title || "Untitled Article"}</h3>
+                                <p className="text-[13px] text-slate-500 font-sans line-clamp-2 leading-relaxed">{blog?.excerpt || blog?.content?.substring(0, 150) || "No content available."}</p>
                                 <div className="flex items-center gap-6 pt-2">
                                     <button 
                                         onClick={() => openModal(blog)}
-                                        className="inline-flex items-center gap-2 text-sm font-bold text-slate-800 hover:text-sky-dark transition-colors"
+                                        className="inline-flex items-center gap-2 text-[13px] font-semibold text-slate-800 hover:text-sky-dark transition-colors"
                                     >
                                         <Edit size={16} /> Edit Article
                                     </button>
                                     <button 
                                         onClick={() => handleDelete(blog._id)}
-                                        className="inline-flex items-center gap-2 text-sm font-bold text-rose hover:text-rose-dark transition-colors"
+                                        className="inline-flex items-center gap-2 text-[13px] font-semibold text-rose hover:text-rose-dark transition-colors"
                                     >
                                         <Trash2 size={16} /> Remove
                                     </button>
@@ -260,7 +260,7 @@ const BlogsAdmin = () => {
                             onClick={e => e.stopPropagation()}
                         >
                             <div className="p-8 border-b border-slate-50 flex items-center justify-between">
-                                <h2 className="text-2xl font-bold text-slate-800">{editingBlog ? 'Edit Post' : 'Create New Post'}</h2>
+                                <h2 className="text-xl font-semibold text-slate-800">{editingBlog ? 'Edit Post' : 'Create New Post'}</h2>
                                 <button onClick={closeModal} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
                                     <X size={24} />
                                 </button>
@@ -270,34 +270,34 @@ const BlogsAdmin = () => {
                                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                                     <div className="lg:col-span-2 space-y-6">
                                         <div className="space-y-1">
-                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Article Title</label>
+                                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Article Title</label>
                                             <input 
                                                 required
                                                 placeholder="Enter title..."
-                                                className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-bold text-lg"
+                                                className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-semibold text-base"
                                                 value={formData.title}
                                                 onChange={e => setFormData({...formData, title: e.target.value})}
                                             />
                                         </div>
 
                                         <div className="space-y-1">
-                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Short Excerpt</label>
+                                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Short Excerpt</label>
                                             <textarea 
                                                 rows="2"
                                                 placeholder="Brief summary for list view..."
-                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-sans"
+                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-sans text-[13px]"
                                                 value={formData.excerpt}
                                                 onChange={e => setFormData({...formData, excerpt: e.target.value})}
                                             />
                                         </div>
 
                                         <div className="space-y-1">
-                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Article Content</label>
+                                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Article Content</label>
                                             <textarea 
                                                 required
                                                 rows="12"
                                                 placeholder="Write your article content here..."
-                                                className="w-full px-6 py-5 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-sans leading-relaxed resize-none shadow-inner"
+                                                className="w-full px-6 py-5 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-sans leading-relaxed resize-none shadow-inner text-[13px]"
                                                 value={formData.content}
                                                 onChange={e => setFormData({...formData, content: e.target.value})}
                                             />
@@ -306,7 +306,7 @@ const BlogsAdmin = () => {
 
                                     <div className="space-y-6">
                                         <div className="space-y-1">
-                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Featured Image</label>
+                                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Featured Image</label>
                                             <div 
                                                 onClick={() => document.getElementById('blog-image').click()}
                                                 className="aspect-square border-2 border-dashed border-slate-100 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:border-sky bg-slate-50 overflow-hidden relative group"
@@ -322,7 +322,7 @@ const BlogsAdmin = () => {
                                                 ) : (
                                                     <div className="flex flex-col items-center p-4 text-center">
                                                         <Upload className="text-slate-300 mb-2" size={32} />
-                                                        <p className="text-xs font-bold text-slate-500">Tap to upload an image</p>
+                                                        <p className="text-[11px] font-semibold text-slate-500">Tap to upload an image</p>
                                                     </div>
                                                 )}
                                             </div>
@@ -330,7 +330,7 @@ const BlogsAdmin = () => {
 
                                         <div className="space-y-4 pt-4 border-t border-slate-50">
                                             <div className="space-y-1">
-                                                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Specialty Category</label>
+                                                <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Specialty Category</label>
                                                 <select 
                                                     className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-medium"
                                                     value={formData.category}
@@ -343,7 +343,7 @@ const BlogsAdmin = () => {
                                             </div>
 
                                             <div className="space-y-1">
-                                                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Author</label>
+                                                <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Author</label>
                                                 <input 
                                                     className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-medium"
                                                     value={formData.author}
@@ -359,7 +359,7 @@ const BlogsAdmin = () => {
                                                 >
                                                     <div className={`absolute top-1 w-6 h-6 bg-white rounded-full transition-all ${formData.isPublished ? 'right-1' : 'left-1 shadow-sm'}`} />
                                                 </button>
-                                                <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">
+                                                <span className="text-[11px] font-semibold text-slate-600 uppercase tracking-widest">
                                                     {formData.isPublished ? 'Published' : 'Draft Mode'}
                                                 </span>
                                             </div>
@@ -370,7 +370,7 @@ const BlogsAdmin = () => {
                                 <button 
                                     disabled={(!selectedFile && !editingBlog) || isSubmitting}
                                     type="submit"
-                                    className="w-full py-5 bg-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-all disabled:opacity-50 shadow-xl"
+                                    className="w-full py-5 bg-slate-900 text-white rounded-2xl font-medium flex items-center justify-center gap-2 hover:bg-slate-800 transition-all disabled:opacity-50 shadow-xl"
                                 >
                                     {isSubmitting ? <Loader2 className="animate-spin" /> : <CheckCircle size={20} />}
                                     <span>{editingBlog ? 'Save Article Changes' : 'Publish Article to Site'}</span>

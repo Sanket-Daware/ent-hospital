@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Info, Loader2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import GalleryCard, { getGridSize } from './GalleryCard';
+import GalleryCard from './GalleryCard';
 
 const GallerySection = () => {
     const [selectedImg, setSelectedImg] = useState(null);
@@ -71,7 +71,7 @@ const GallerySection = () => {
                         <p className="text-slate-400 italic">No facility images uploaded yet.</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[220px] lg:auto-rows-[260px]">
+                    <div className="columns-1 md:columns-2 lg:columns-4 gap-5">
                         {items.map((img, i) => (
                             <GalleryCard
                                 key={img._id}

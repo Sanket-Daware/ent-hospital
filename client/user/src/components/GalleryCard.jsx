@@ -4,23 +4,27 @@ import { ArrowRight } from 'lucide-react';
 
 
 
-// Bento grid sizing pattern (repeats every 6 cards)
-// Creates the staggered magazine layout from the reference
-const gridPatterns = [
-    'md:col-span-1 md:row-span-2',   // 1: Tall left
-    'md:col-span-1 md:row-span-1',   // 2: Standard
-    'md:col-span-1 md:row-span-1',   // 3: Standard
-    'md:col-span-1 md:row-span-2',   // 4: Tall center
-    'md:col-span-1 md:row-span-1',   // 5: Standard
-    'md:col-span-1 md:row-span-1',   // 6: Standard
+// Randomized heights designed to break any stair-step/ascending patterns
+const randomizedHeights = [
+    'h-[420px]',
+    'h-[260px]',
+    'h-[350px]',
+    'h-[450px]',
+    'h-[280px]',
+    'h-[380px]',
+    'h-[250px]',
+    'h-[400px]',
+    'h-[300px]',
+    'h-[320px]'
 ];
 
-export const getGridSize = (index) => gridPatterns[index % gridPatterns.length];
+export const getHeight = (index) => randomizedHeights[index % randomizedHeights.length];
 
 
 
 const GalleryCard = ({ item, index, onClick }) => {
-    const isTall = (index % 6 === 0) || (index % 6 === 3);
+    // Just for font sizing logic based on height
+    const isTall = [1, 4, 5, 8].includes(index % randomizedHeights.length);
 
     return (
         <motion.div
@@ -41,7 +45,7 @@ const GalleryCard = ({ item, index, onClick }) => {
             whileInView="visible"
             viewport={{ once: true, margin: '-30px' }}
             onClick={() => onClick && onClick(item)}
-            className={`group relative rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300 ${getGridSize(index)}`}
+            className={`group relative w-full rounded-2xl mb-5 overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300 break-inside-avoid ${getHeight(index)}`}
         >
             {/* Background Image */}
             <img

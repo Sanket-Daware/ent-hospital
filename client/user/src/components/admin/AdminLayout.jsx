@@ -75,7 +75,7 @@ const AdminLayout = ({ children }) => {
                         <motion.div 
                             initial={{ opacity: 0, x: -10 }} 
                             animate={{ opacity: 1, x: 0 }}
-                            className="font-bold text-slate-800 text-lg tracking-tight truncate"
+                            className="font-semibold text-slate-800 text-base tracking-tight truncate"
                         >
                             Suvidha Admin
                         </motion.div>
@@ -98,7 +98,7 @@ const AdminLayout = ({ children }) => {
                             >
                                 <item.icon size={22} className={isActive ? 'text-sky-dark' : 'group-hover:scale-110 transition-transform flex shrink-0'} />
                                 {isSidebarOpen && (
-                                    <span className="font-bold text-sm tracking-tight truncate">{item.name}</span>
+                                    <span className="font-medium text-[13px] tracking-tight truncate">{item.name}</span>
                                 )}
                             </Link>
                         );
@@ -112,7 +112,7 @@ const AdminLayout = ({ children }) => {
                     >
                         <LogOut size={22} className="group-hover:-translate-x-1 transition-transform flex shrink-0" />
                         {isSidebarOpen && (
-                            <span className="font-bold text-sm tracking-tight">Log Out</span>
+                            <span className="font-medium text-[13px] tracking-tight">Log Out</span>
                         )}
                     </button>
                     
@@ -126,8 +126,8 @@ const AdminLayout = ({ children }) => {
                                 <User size={20} />
                             </div>
                             <div className="overflow-hidden">
-                                <p className="text-sm font-bold text-slate-800 truncate">{user?.username}</p>
-                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{user?.role}</p>
+                                <p className="text-[13px] font-semibold text-slate-800 truncate">{user?.username}</p>
+                                <p className="text-[10px] font-medium text-slate-400 uppercase tracking-widest">{user?.role}</p>
                             </div>
                         </motion.div>
                     )}
@@ -154,7 +154,7 @@ const AdminLayout = ({ children }) => {
                         </button>
                         <div className="h-8 w-px bg-slate-100" />
                         <div className="flex items-center gap-3">
-                            <p className="text-sm font-bold text-slate-800 hidden md:block">ENT Hospital Admin</p>
+                            <p className="text-[13px] font-medium text-slate-800 hidden md:block">ENT Hospital Admin</p>
                             <div className="w-10 h-10 bg-mint rounded-xl flex items-center justify-center text-mint-dark font-bold shrink-0">H</div>
                         </div>
                     </div>

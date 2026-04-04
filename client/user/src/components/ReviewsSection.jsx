@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, Quote, X, Loader2, CheckCircle2, PenLine } from 'lucide-react';
+import { Star, Quote, X, Loader2, CheckCircle2, PenLine, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 
@@ -37,6 +37,23 @@ const ReviewsSection = () => {
     const [submitting, setSubmitting] = useState(false);
     const [formData, setFormData] = useState({ patientName: '', rating: 0, content: '' });
     const [formError, setFormError] = useState('');
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const cardsPerView = {
+        mobile: 1,
+        tablet: 2,
+        desktop: 4
+    };
+
+    const handleNext = () => {
+        if (reviews.length === 0) return;
+        setCurrentIndex((prev) => (prev + 1) % reviews.length);
+    };
+
+    const handlePrev = () => {
+        if (reviews.length === 0) return;
+        setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+    };
 
     useEffect(() => {
         fetchReviews();
@@ -135,7 +152,7 @@ const ReviewsSection = () => {
                     </motion.div>
                 </div>
 
-                {/* Review Cards */}
+                {/* Review Cards Slider */}
                 {isLoading ? (
                     <div className="flex justify-center py-16">
                         <Loader2 className="animate-spin text-slate-200" size={48} />
@@ -145,46 +162,74 @@ const ReviewsSection = () => {
                         <p className="text-slate-300 italic font-sans">No reviews yet. Be the first to share your experience!</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {reviews.slice(0, 4).map((review, index) => (
-                            <motion.div
-                                key={review._id}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className={`p-8 rounded-3xl ${cardColors[index % cardColors.length]} relative group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-1`}
+                    <div className="relative group/slider">
+                        <div className="overflow-hidden px-4 -mx-4">
+                            <motion.div 
+                                className="flex gap-6"
+                                animate={{ x: `calc(-${currentIndex * (100 / (window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 4))}%)` }}
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             >
-                                <div className="absolute top-6 right-8 text-slate-200 group-hover:text-slate-300 transition-colors">
-                                    <Quote size={32} strokeWidth={3} />
-                                </div>
-                                
-                                <div className="flex text-amber-400 mb-4">
-                                    {[...Array(review.rating)].map((_, i) => (
-                                        <Star key={i} size={16} fill="currentColor" />
-                                    ))}
-                                </div>
-                                
-                                <p className="text-slate-700 text-sm font-sans leading-relaxed mb-6 italic">
-                                    "{review.content}"
-                                </p>
-                                
-                                <div className="flex items-center gap-3 mt-auto">
-                                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-500 font-bold shadow-sm overflow-hidden text-xs">
-                                        {review.patientImageUrl
-                                            ? <img src={review.patientImageUrl} alt={review.patientName} className="w-full h-full object-cover" />
-                                            : review.patientName.charAt(0).toUpperCase()
-                                        }
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-slate-800 tracking-tight text-sm">{review.patientName}</h4>
-                                        <p className="text-[10px] text-slate-500 font-medium uppercase tracking-widest">
-                                            {review.treatment || 'Patient'}
+                                {reviews.map((review, index) => (
+                                    <motion.div
+                                        key={review._id}
+                                        className={`min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(25%-18px)] p-8 rounded-3xl ${cardColors[index % cardColors.length]} relative group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-1`}
+                                    >
+                                        <div className="absolute top-6 right-8 text-slate-200 group-hover:text-slate-300 transition-colors">
+                                            <Quote size={32} strokeWidth={3} />
+                                        </div>
+                                        
+                                        <div className="flex text-amber-400 mb-4">
+                                            {[...Array(review.rating)].map((_, i) => (
+                                                <Star key={i} size={16} fill="currentColor" />
+                                            ))}
+                                        </div>
+                                        
+                                        <p className="text-slate-700 text-sm font-sans leading-relaxed mb-6 italic">
+                                            "{review.content}"
                                         </p>
-                                    </div>
-                                </div>
+                                        
+                                        <div className="flex items-center gap-3 mt-auto">
+                                            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-500 font-bold shadow-sm overflow-hidden text-xs">
+                                                {review.patientImageUrl
+                                                    ? <img src={review.patientImageUrl} alt={review.patientName} className="w-full h-full object-cover" />
+                                                    : review.patientName.charAt(0).toUpperCase()
+                                                }
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-slate-800 tracking-tight text-sm">{review.patientName}</h4>
+                                                <p className="text-[10px] text-slate-500 font-medium uppercase tracking-widest">
+                                                    {review.treatment || 'Patient'}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
                             </motion.div>
-                        ))}
+                        </div>
+
+                        {/* Navigation Buttons */}
+                        <div className="flex items-center justify-center gap-4 mt-12">
+                            <button 
+                                onClick={handlePrev}
+                                className="w-12 h-12 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300 active:scale-90"
+                            >
+                                <ChevronLeft size={24} />
+                            </button>
+                            <div className="flex gap-1.5 px-2">
+                                {reviews.map((_, i) => (
+                                    <div 
+                                        key={i} 
+                                        className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-6 bg-mint-dark' : 'w-1.5 bg-slate-200'}`} 
+                                    />
+                                ))}
+                            </div>
+                            <button 
+                                onClick={handleNext}
+                                className="w-12 h-12 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300 active:scale-90"
+                            >
+                                <ChevronRight size={24} />
+                            </button>
+                        </div>
                     </div>
                 )}
 

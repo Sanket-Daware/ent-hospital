@@ -31,11 +31,11 @@ const SpecializedTeam = () => {
     ];
 
     return (
-        <section className="py-20 relative overflow-hidden">
+        <section className="pt-8 pb-20 relative overflow-hidden">
             {/* Background decorative element */}
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-mint/5 rounded-full blur-[120px] -translate-x-1/2 translate-y-1/2"></div>
             
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="max-w-6xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-12">
                     <motion.span 
                         initial={{ opacity: 0, y: 10 }}
@@ -65,7 +65,7 @@ const SpecializedTeam = () => {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
                     {doctors.map((doc, i) => (
                         <motion.div 
                             key={i}
@@ -73,7 +73,7 @@ const SpecializedTeam = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1, duration: 0.6 }}
-                            className="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all"
+                            className="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] hover:-translate-y-3 transition-all duration-300 border border-slate-50"
                         >
                             {/* Image Container */}
                             <div className="aspect-[1/1] overflow-hidden relative">

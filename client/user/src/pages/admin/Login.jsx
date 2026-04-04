@@ -44,8 +44,8 @@ const Login = () => {
                         <div className="w-20 h-20 bg-sky rounded-[2rem] flex items-center justify-center text-sky-dark mx-auto mb-6 shadow-xl shadow-sky/50 transform -rotate-6">
                             <ShieldCheck size={40} />
                         </div>
-                        <h1 className="text-3xl font-bold text-slate-800 tracking-tight mb-2">Hospital Admin</h1>
-                        <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Secure Access Portal</p>
+                        <h1 className="text-2xl font-semibold text-slate-800 tracking-tight mb-1">Hospital Admin</h1>
+                        <p className="text-slate-400 font-medium uppercase tracking-widest text-[10px]">Secure Access Portal</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -55,7 +55,7 @@ const Login = () => {
                                     initial={{ opacity: 0, height: 0 }}
                                     animate={{ opacity: 1, height: 'auto' }}
                                     exit={{ opacity: 0, height: 0 }}
-                                    className="p-4 bg-rose-50 border border-rose-100 rounded-2xl text-rose-600 text-xs font-bold leading-relaxed flex items-center gap-3"
+                                    className="p-4 bg-rose-50 border border-rose-100 rounded-2xl text-rose-600 text-[11px] font-medium leading-relaxed flex items-center gap-3"
                                 >
                                     <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse shrink-0" />
                                     {error}
@@ -64,7 +64,7 @@ const Login = () => {
                         </AnimatePresence>
 
                         <div className="space-y-2">
-                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Username</label>
+                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Username</label>
                             <div className="relative group">
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-300 group-focus-within:text-sky-dark transition-colors">
                                     <User size={18} />
@@ -75,15 +75,15 @@ const Login = () => {
                                     placeholder="Enter your username"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-sky/5 focus:border-sky transition-all placeholder:text-slate-300 font-medium"
+                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-sky/5 focus:border-sky transition-all placeholder:text-slate-300 font-normal text-[14px]"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <div className="flex justify-between items-center ml-1">
-                                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Password</label>
-                                <button type="button" className="text-[10px] font-bold text-sky-dark uppercase tracking-widest hover:text-sky transition-colors">Forgot?</button>
+                                <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">Password</label>
+                                <button type="button" className="text-[10px] font-medium text-sky-dark uppercase tracking-widest hover:text-sky transition-colors">Forgot?</button>
                             </div>
                             <div className="relative group">
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-300 group-focus-within:text-sky-dark transition-colors">
@@ -95,7 +95,7 @@ const Login = () => {
                                     placeholder="••••••••"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-sky/5 focus:border-sky transition-all placeholder:text-slate-300 font-medium"
+                                    className="w-full pl-12 pr-12 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-sky/5 focus:border-sky transition-all placeholder:text-slate-300 font-normal text-[14px]"
                                 />
                                 <button 
                                     type="button"
@@ -110,7 +110,7 @@ const Login = () => {
                         <button 
                             disabled={isLoading}
                             type="submit" 
-                            className="w-full py-5 bg-slate-900 border-b-4 border-slate-700 hover:bg-slate-800 hover:border-slate-900 text-white rounded-2xl font-bold tracking-tight shadow-xl shadow-slate-200 transition-all flex items-center justify-center gap-3 group disabled:opacity-70 disabled:pointer-events-none active:scale-[0.98] active:border-b-0 mt-8"
+                            className="w-full py-5 bg-slate-900 border-b-4 border-slate-700 hover:bg-slate-800 hover:border-slate-900 text-white rounded-2xl font-medium tracking-tight shadow-xl shadow-slate-200 transition-all flex items-center justify-center gap-3 group disabled:opacity-70 disabled:pointer-events-none active:scale-[0.98] active:border-b-0 mt-8"
                         >
                             {isLoading ? (
                                 <>
@@ -127,7 +127,7 @@ const Login = () => {
                     </form>
                 </motion.div>
 
-                <p className="text-center mt-12 text-slate-400 font-bold text-[10px] uppercase tracking-widest">
+                <p className="text-center mt-12 text-slate-400 font-medium text-[10px] uppercase tracking-widest">
                     Authorized Personnel Only • &copy; 2026 ENT Care Hospital
                 </p>
             </div>

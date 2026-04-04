@@ -157,20 +157,20 @@ const Appointments = () => {
         <div className="space-y-8">
              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-800 tracking-tight mb-2">Patient Appointments</h1>
-                    <p className="text-slate-500 font-sans">Manage and schedule incoming hospital visits.</p>
+                    <h1 className="text-2xl font-semibold text-slate-800 tracking-tight mb-1">Patient Appointments</h1>
+                    <p className="text-[13px] text-slate-500 font-sans">Manage and schedule incoming hospital visits.</p>
                 </div>
                 <div className="flex items-center gap-3">
                     <button 
                         onClick={downloadCSV}
-                        className="flex items-center gap-2 px-6 py-3 bg-slate-800 text-white rounded-2xl font-bold text-sm hover:bg-slate-900 transition-all shadow-lg active:scale-95"
+                        className="flex items-center gap-2 px-6 py-3 bg-slate-800 text-white rounded-2xl font-medium text-[13px] hover:bg-slate-900 transition-all shadow-lg active:scale-95"
                     >
                         <Download size={18} />
                         <span>Export CSV</span>
                     </button>
                     <button 
                         onClick={() => setIsSettingsOpen(true)}
-                        className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-800 rounded-2xl font-bold text-sm hover:bg-slate-50 transition-all shadow-sm active:scale-95"
+                        className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-800 rounded-2xl font-medium text-[13px] hover:bg-slate-50 transition-all shadow-sm active:scale-95"
                     >
                         <SettingsIcon size={18} className="text-slate-400" />
                         <span>Manage Dates</span>
@@ -182,13 +182,13 @@ const Appointments = () => {
             <div className="flex flex-wrap items-center gap-4 bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm">
                 <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-xl text-slate-400">
                     <Filter size={16} />
-                    <span className="text-xs font-bold uppercase tracking-widest">Filter By</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-widest">Filter By</span>
                 </div>
                 {['All', 'Pending', 'Confirmed', 'Cancelled'].map((status) => (
                     <button
                         key={status}
                         onClick={() => setFilterStatus(status)}
-                        className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${
+                        className={`px-6 py-2 rounded-xl text-[13px] font-medium transition-all ${
                             filterStatus === status 
                             ? 'bg-slate-900 text-white shadow-lg' 
                             : 'bg-white text-slate-500 hover:bg-slate-50 border border-transparent'
@@ -197,7 +197,7 @@ const Appointments = () => {
                         {status}
                     </button>
                 ))}
-                <div className="ml-auto flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest px-4">
+                <div className="ml-auto flex items-center gap-2 text-slate-400 text-[11px] font-medium uppercase tracking-widest px-4">
                     <span>{filteredAppointments.length} Appointments Found</span>
                 </div>
             </div>
@@ -208,11 +208,11 @@ const Appointments = () => {
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-slate-50/50">
-                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Patient Details</th>
-                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Reason for Visit</th>
-                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Date Logged</th>
-                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Status</th>
-                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 text-center">Actions</th>
+                                <th className="px-8 py-6 text-[10px] font-medium text-slate-400 uppercase tracking-widest border-b border-slate-100">Patient Details</th>
+                                <th className="px-8 py-6 text-[10px] font-medium text-slate-400 uppercase tracking-widest border-b border-slate-100">Reason for Visit</th>
+                                <th className="px-8 py-6 text-[10px] font-medium text-slate-400 uppercase tracking-widest border-b border-slate-100">Date Logged</th>
+                                <th className="px-8 py-6 text-[10px] font-medium text-slate-400 uppercase tracking-widest border-b border-slate-100">Status</th>
+                                <th className="px-8 py-6 text-[10px] font-medium text-slate-400 uppercase tracking-widest border-b border-slate-100 text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-50">
@@ -239,40 +239,40 @@ const Appointments = () => {
                                     >
                                         <td className="px-8 py-6">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-12 h-12 bg-sky rounded-full flex items-center justify-center text-sky-dark font-bold text-xl shadow-inner uppercase">
+                                                <div className="w-12 h-12 bg-sky rounded-full flex items-center justify-center text-sky-dark font-semibold text-lg shadow-inner uppercase">
                                                     {appt.name[0]}
                                                 </div>
                                                 <div>
-                                                    <p className="font-bold text-slate-800 tracking-tight leading-none mb-1.5">{appt.name} {appt.surname}</p>
+                                                    <p className="font-semibold text-slate-800 tracking-tight text-[14px] leading-none mb-1.5">{appt.name} {appt.surname}</p>
                                                     <div className="flex items-center gap-2 text-slate-400">
                                                         <Phone size={12} />
-                                                        <span className="text-xs font-medium font-sans">{appt.contact}</span>
+                                                        <span className="text-[12px] font-normal font-sans">{appt.contact}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-8 py-6">
                                             <div className="flex flex-col gap-1">
-                                                <span className="px-3 py-1 bg-slate-100 inline-block text-[10px] font-bold text-slate-500 uppercase tracking-widest rounded-lg w-fit">
+                                                <span className="px-3 py-1 bg-slate-100 inline-block text-[10px] font-medium text-slate-500 uppercase tracking-widest rounded-lg w-fit">
                                                     Secondary Care
                                                 </span>
-                                                <p className="font-bold text-slate-600 text-sm tracking-tight">{appt.reason}</p>
+                                                <p className="font-medium text-slate-600 text-[13px] tracking-tight">{appt.reason}</p>
                                             </div>
                                         </td>
                                         <td className="px-8 py-6">
                                             <div className="flex flex-col">
-                                                <div className="flex items-center gap-2 text-slate-800 font-bold text-sm mb-1">
+                                                <div className="flex items-center gap-2 text-slate-800 font-medium text-[13px] mb-1">
                                                     <Calendar size={14} className="text-slate-400" />
                                                     {new Date(appt.appointmentDate).toLocaleDateString()}
                                                 </div>
-                                                <div className="flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                                                <div className="flex items-center gap-2 text-[10px] text-slate-400 font-normal uppercase tracking-widest">
                                                     <Clock size={12} />
                                                     {appt.timeSlot}
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-8 py-6">
-                                            <div className={`px-4 py-1.5 rounded-full inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest ${
+                                            <div className={`px-4 py-1.5 rounded-full inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-widest ${
                                                 appt.status === 'confirmed' ? 'bg-mint text-mint-dark' : 
                                                 appt.status === 'cancelled' ? 'bg-rose text-rose-dark shadow-sm shadow-rose/20' : 
                                                 'bg-sky text-sky-dark'
@@ -331,13 +331,13 @@ const Appointments = () => {
 
                 {/* Pagination (Visual Placeholder) */}
                 <div className="p-8 border-t border-slate-50 flex items-center justify-between">
-                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest italic font-sans">
+                    <p className="text-[11px] font-medium text-slate-400 uppercase tracking-widest italic font-sans">
                         Showing {filteredAppointments.length} of {appointments.length} records
                     </p>
                     <div className="flex items-center gap-2">
                         <button className="p-2 bg-slate-50 text-slate-400 rounded-xl hover:bg-slate-100 transition-colors pointer-events-none opacity-50"><ChevronLeft size={20} /></button>
-                        <button className="w-10 h-10 bg-slate-900 text-white rounded-xl font-bold text-sm shadow-lg">1</button>
-                        <button className="w-10 h-10 bg-white border border-slate-200 text-slate-400 rounded-xl font-bold text-sm hover:bg-slate-50 transition-colors">2</button>
+                        <button className="w-10 h-10 bg-slate-900 text-white rounded-xl font-medium text-[13px] shadow-lg">1</button>
+                        <button className="w-10 h-10 bg-white border border-slate-200 text-slate-400 rounded-xl font-medium text-[13px] hover:bg-slate-50 transition-colors">2</button>
                         <button className="p-2 bg-white border border-slate-200 text-slate-400 rounded-xl hover:bg-slate-50 transition-colors"><ChevronRight size={20} /></button>
                     </div>
                 </div>
@@ -362,8 +362,8 @@ const Appointments = () => {
                         >
                             <div className="p-8 border-b border-slate-50 flex items-center justify-between">
                                 <div>
-                                    <h2 className="text-2xl font-bold text-slate-800">Clinic Availability</h2>
-                                    <p className="text-slate-400 text-sm font-sans mt-1">Manage closed dates and holiday schedule.</p>
+                                    <h2 className="text-xl font-semibold text-slate-800">Clinic Availability</h2>
+                                    <p className="text-slate-400 text-[13px] font-sans mt-1">Manage closed dates and holiday schedule.</p>
                                 </div>
                                 <button onClick={() => setIsSettingsOpen(false)} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
                                     <X size={24} />
@@ -373,7 +373,7 @@ const Appointments = () => {
                             <div className="p-8 space-y-8">
                                 {/* Add New Closed Date Form */}
                                 <form onSubmit={handleAddClosedDate} className="bg-slate-50 p-6 rounded-3xl space-y-4">
-                                    <h3 className="text-sm font-bold text-slate-800 uppercase tracking-widest pl-1">Add Blocked Date</h3>
+                                    <h3 className="text-[12px] font-semibold text-slate-800 uppercase tracking-widest pl-1">Add Blocked Date</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <input 
                                             required
@@ -391,7 +391,7 @@ const Appointments = () => {
                                     </div>
                                     <button 
                                         type="submit"
-                                        className="w-full py-3 bg-slate-900 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors"
+                                        className="w-full py-3 bg-slate-900 text-white rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors"
                                     >
                                         <Plus size={18} /> Add Date
                                     </button>
@@ -399,7 +399,7 @@ const Appointments = () => {
 
                                 {/* List of Closed Dates */}
                                 <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                                    <h3 className="text-sm font-bold text-slate-800 uppercase tracking-widest pl-1">Scheduled Closures</h3>
+                                    <h3 className="text-[12px] font-semibold text-slate-800 uppercase tracking-widest pl-1">Scheduled Closures</h3>
                                     {closedDates.length === 0 ? (
                                         <p className="text-center py-6 text-slate-300 italic font-sans">No closed dates scheduled.</p>
                                     ) : (
@@ -410,8 +410,8 @@ const Appointments = () => {
                                                         <Calendar size={18} />
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm font-bold text-slate-800">{new Date(d.date).toLocaleDateString(undefined, { dateStyle: 'long' })}</p>
-                                                        <p className="text-xs text-slate-400 font-sans tracking-tight">{d.reason}</p>
+                                                        <p className="text-[13px] font-semibold text-slate-800">{new Date(d.date).toLocaleDateString(undefined, { dateStyle: 'long' })}</p>
+                                                        <p className="text-[12px] text-slate-400 font-sans tracking-tight">{d.reason}</p>
                                                     </div>
                                                 </div>
                                                 <button 

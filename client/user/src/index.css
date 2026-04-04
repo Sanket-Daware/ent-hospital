@@ -24,3 +24,27 @@
     @apply font-serif;
   }
 }
+
+/* Masonry grid layout - Exact Pinterest Gaps */
+.masonry-grid {
+  display: flex;
+  margin-left: -16px; /* Pinterest Standard Gutter Offset */
+  width: auto;
+}
+.masonry-grid_column {
+  padding-left: 16px; /* Pinterest Standard Gutter Size */
+  background-clip: padding-box;
+}
+
+/* Masonry card animations & Boxed 3D Styles */
+.masonry-card {
+  margin-bottom: 24px;
+}
+
+.boxed-3d {
+  @apply bg-white border border-slate-100 shadow-md shadow-slate-200/50 transition-all duration-300;
+}
+
+.boxed-3d:hover {
+  @apply shadow-lg shadow-slate-300/60 translate-y-[-4px];
+}

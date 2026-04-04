@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Info, Loader2, Image as ImageIcon } from 'lucide-react';
 import axios from 'axios';
-import GalleryCard, { getGridSize } from '../components/GalleryCard';
+import GalleryCard from '../components/GalleryCard';
 
 const GalleryPage = () => {
     const [selectedImg, setSelectedImg] = useState(null);
@@ -125,7 +125,7 @@ const GalleryPage = () => {
                         ) : (
                             <motion.div 
                                 layout
-                                className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[220px] lg:auto-rows-[260px]"
+                                className="columns-1 md:columns-2 lg:columns-4 gap-5"
                             >
                                 <AnimatePresence mode="popLayout">
                                     {items.map((img, i) => (

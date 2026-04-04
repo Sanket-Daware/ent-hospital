@@ -151,11 +151,11 @@ const TestimonialsAdmin = () => {
         <div className="space-y-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-800 tracking-tight mb-2">Patient Feedback</h1>
-                    <p className="text-slate-500 font-sans">
+                    <h1 className="text-2xl font-semibold text-slate-800 tracking-tight mb-1">Patient Feedback</h1>
+                    <p className="text-[13px] text-slate-500 font-sans">
                         Manage and approve patient reviews.
                         {pendingCount > 0 && (
-                            <span className="ml-2 px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs font-bold">
+                            <span className="ml-2 px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-[11px] font-semibold">
                                 {pendingCount} pending approval
                             </span>
                         )}
@@ -163,7 +163,7 @@ const TestimonialsAdmin = () => {
                 </div>
                 <button 
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-slate-800 transition-all shadow-lg active:scale-95"
+                    className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl font-medium text-[13px] hover:bg-slate-800 transition-all shadow-lg active:scale-95"
                 >
                     <Plus size={18} />
                     <span>Add Testimonial</span>
@@ -174,13 +174,13 @@ const TestimonialsAdmin = () => {
             <div className="flex flex-wrap items-center gap-3 bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm">
                 <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-xl text-slate-400">
                     <Filter size={16} />
-                    <span className="text-xs font-bold uppercase tracking-widest">Filter By</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-widest">Filter By</span>
                 </div>
                 {['All', 'Pending', 'Approved', 'Admin'].map((label) => (
                     <button
                         key={label}
                         onClick={() => setActiveFilter(label)}
-                        className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${
+                        className={`px-5 py-2 rounded-xl text-[13px] font-semibold transition-all ${
                             activeFilter === label 
                             ? 'bg-slate-900 text-white shadow-lg' 
                             : 'bg-white text-slate-500 hover:bg-slate-50 border border-transparent'
@@ -188,11 +188,11 @@ const TestimonialsAdmin = () => {
                     >
                         {label}
                         {label === 'Pending' && pendingCount > 0 && (
-                            <span className="ml-1.5 px-1.5 py-0.5 bg-amber-400 text-white rounded-full text-[10px]">{pendingCount}</span>
+                            <span className="ml-1.5 px-1.5 py-0.5 bg-amber-400 text-white rounded-full text-[10px] font-medium">{pendingCount}</span>
                         )}
                     </button>
                 ))}
-                <div className="ml-auto text-xs font-bold text-slate-400 uppercase tracking-widest px-4">
+                <div className="ml-auto text-[11px] font-semibold text-slate-400 uppercase tracking-widest px-4">
                     {filteredTestimonials.length} Reviews
                 </div>
             </div>
@@ -222,14 +222,14 @@ const TestimonialsAdmin = () => {
                             >
                                 {/* Status Badge */}
                                 <div className="flex items-center justify-between mb-4">
-                                    <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 ${STATUS_COLORS[statusLabel]}`}>
+                                    <span className={`px-3 py-1 rounded-full text-[10px] font-medium uppercase tracking-widest flex items-center gap-1.5 ${STATUS_COLORS[statusLabel]}`}>
                                         {statusLabel === 'approved' && <CheckCircle2 size={12} />}
                                         {statusLabel === 'pending' && <Clock size={12} />}
                                         {statusLabel === 'rejected' && <XCircle size={12} />}
                                         {statusLabel}
                                     </span>
                                     {t.source === 'patient' && (
-                                        <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Patient Submitted</span>
+                                        <span className="text-[10px] font-medium text-slate-300 uppercase tracking-widest">Patient Submitted</span>
                                     )}
                                 </div>
 
@@ -239,7 +239,7 @@ const TestimonialsAdmin = () => {
                                             <Star key={i} size={16} className={i < t.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-100'} />
                                         ))}
                                     </div>
-                                    <p className="text-slate-600 font-sans leading-relaxed italic">"{t.content}"</p>
+                                    <p className="text-[14px] text-slate-600 font-sans leading-relaxed italic">"{t.content}"</p>
                                     <div className="flex items-center gap-4">
                                         <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center overflow-hidden shrink-0">
                                             {t.patientImageUrl ? (
@@ -249,8 +249,8 @@ const TestimonialsAdmin = () => {
                                             )}
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-800 tracking-tight">{t.patientName}</h4>
-                                            {t.treatment && <p className="text-xs font-bold text-sky-dark uppercase tracking-widest">{t.treatment}</p>}
+                                            <h4 className="font-semibold text-slate-800 tracking-tight text-[15px]">{t.patientName}</h4>
+                                            {t.treatment && <p className="text-[11px] font-semibold text-sky-dark uppercase tracking-widest">{t.treatment}</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -261,7 +261,7 @@ const TestimonialsAdmin = () => {
                                     {!t.isApproved && (
                                         <button 
                                             onClick={() => handleApprove(t._id)}
-                                            className="flex items-center gap-2 px-4 py-2 bg-mint/20 text-mint-dark rounded-xl text-xs font-bold hover:bg-mint hover:text-white transition-all"
+                                            className="flex items-center gap-2 px-4 py-2 bg-mint/20 text-mint-dark rounded-xl text-[12px] font-semibold hover:bg-mint hover:text-white transition-all"
                                         >
                                             <CheckCircle2 size={14} /> Approve
                                         </button>
@@ -270,7 +270,7 @@ const TestimonialsAdmin = () => {
                                     {t.isApproved && (
                                         <button 
                                             onClick={() => handleReject(t._id)}
-                                            className="flex items-center gap-2 px-4 py-2 bg-rose-100 text-rose-600 rounded-xl text-xs font-bold hover:bg-rose-500 hover:text-white transition-all"
+                                            className="flex items-center gap-2 px-4 py-2 bg-rose-100 text-rose-600 rounded-xl text-[12px] font-semibold hover:bg-rose-500 hover:text-white transition-all"
                                         >
                                             <XCircle size={14} /> Revoke
                                         </button>
@@ -308,7 +308,7 @@ const TestimonialsAdmin = () => {
                             onClick={e => e.stopPropagation()}
                         >
                             <div className="p-8 border-b border-slate-50 flex items-center justify-between">
-                                <h2 className="text-2xl font-bold text-slate-800">{editingTestimonial ? 'Update Review' : 'New Testimonial'}</h2>
+                                <h2 className="text-xl font-semibold text-slate-800">{editingTestimonial ? 'Update Review' : 'New Testimonial'}</h2>
                                 <button onClick={closeModal} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
                                     <X size={24} />
                                 </button>
@@ -317,11 +317,11 @@ const TestimonialsAdmin = () => {
                             <form onSubmit={handleSubmit} className="p-8 space-y-6">
                                 <div className="space-y-4">
                                     <div className="space-y-1">
-                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Patient Name *</label>
+                                        <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Patient Name *</label>
                                         <input 
                                             required
                                             placeholder="Who gave the feedback?"
-                                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-bold"
+                                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-semibold text-[13px]"
                                             value={formData.patientName}
                                             onChange={e => setFormData({...formData, patientName: e.target.value})}
                                         />
@@ -329,19 +329,19 @@ const TestimonialsAdmin = () => {
 
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="space-y-1">
-                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Treatment Type</label>
+                                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Treatment Type</label>
                                             <input 
                                                 placeholder="e.g. Ear Surgery"
-                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-medium"
+                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-normal text-[13px]"
                                                 value={formData.treatment}
                                                 onChange={e => setFormData({...formData, treatment: e.target.value})}
                                             />
                                         </div>
                                         <div className="space-y-1">
-                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Star Rating *</label>
+                                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Star Rating *</label>
                                             <select 
                                                 required
-                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-medium"
+                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-normal text-[13px]"
                                                 value={formData.rating}
                                                 onChange={e => setFormData({...formData, rating: Number(e.target.value)})}
                                             >
@@ -351,22 +351,22 @@ const TestimonialsAdmin = () => {
                                     </div>
 
                                     <div className="space-y-1">
-                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Patient Photo URL</label>
+                                        <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Patient Photo URL</label>
                                         <input 
                                             placeholder="Paste image link here..."
-                                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-medium"
+                                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-normal text-[13px]"
                                             value={formData.patientImageUrl}
                                             onChange={e => setFormData({...formData, patientImageUrl: e.target.value})}
                                         />
                                     </div>
 
                                     <div className="space-y-1">
-                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Feedback Content *</label>
+                                        <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest ml-1">Feedback Content *</label>
                                         <textarea 
                                             required
                                             rows="4"
                                             placeholder="What did the patient say?"
-                                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-sans resize-none"
+                                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-sky font-sans resize-none text-[13px]"
                                             value={formData.content}
                                             onChange={e => setFormData({...formData, content: e.target.value})}
                                         />
@@ -375,7 +375,7 @@ const TestimonialsAdmin = () => {
 
                                 <button 
                                     type="submit"
-                                    className="w-full py-5 bg-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-lg"
+                                    className="w-full py-5 bg-slate-900 text-white rounded-2xl font-medium flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-lg"
                                 >
                                     {editingTestimonial ? 'Update Testimonial' : 'Save Testimonial'}
                                 </button>

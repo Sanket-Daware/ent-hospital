@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import HeroSection from '../components/about/HeroSection';
 import MissionVision from '../components/about/MissionVision';
-import WhyChooseUs from '../components/about/WhyChooseUs';
+import FAQSection from '../components/about/FAQSection';
 import SpecializedTeam from '../components/about/SpecializedTeam';
 
 const AboutPage = ({ onOpenAppointment }) => {
@@ -11,27 +11,18 @@ const AboutPage = ({ onOpenAppointment }) => {
     }, []);
 
     return (
-        <div className="min-h-screen font-sans selection:bg-mint-dark selection:text-white overflow-x-hidden relative bg-slate-50">
-            {/* Background Image Container */}
-            <div 
-                className="fixed inset-0 z-0 pointer-events-none bg-no-repeat bg-cover bg-center opacity-50"
-                style={{ 
-                    backgroundImage: 'url("/images/bg2.png")',
-                    backgroundAttachment: 'fixed'
-                }}
-            />
-            
-            <div className="relative z-10 pt-20 bg-white/40 backdrop-blur-[2px]">
-            {/* 1. Hero Section (Existing logic extracted) */}
+        <div className="min-h-screen font-sans selection:bg-mint-dark selection:text-white overflow-x-hidden relative bg-white">
+            <div className="relative z-10">
+            {/* 1. Hero Section (Centered & Warm) */}
             <HeroSection onOpenAppointment={onOpenAppointment} />
 
-            {/* 2. Mission & Vision (New) */}
+            {/* 2. Mission & Vision (Floating Card + Zig-Zag) */}
             <MissionVision />
 
-            {/* 3. Why Choose Us (New) */}
-            <WhyChooseUs />
+            {/* 3. FAQ Section (Expanded Q&A) */}
+            <FAQSection />
 
-            {/* 5. Specialized Team (Existing logic extracted) */}
+            {/* 4. Specialized Team */}
             <SpecializedTeam />
             </div>
         </div>

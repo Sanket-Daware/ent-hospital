@@ -75,15 +75,15 @@ const Dashboard = () => {
             {/* Page Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-800 tracking-tight mb-2">Hospital Console</h1>
-                    <p className="text-slate-500 font-sans">Welcome back! Here's a summary of today's activities.</p>
+                    <h1 className="text-2xl font-semibold text-slate-800 tracking-tight mb-1">Hospital Console</h1>
+                    <p className="text-[13px] text-slate-500 font-sans">Welcome back! Here's a summary of today's activities.</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-2xl text-slate-600 font-bold text-sm shadow-sm hover:bg-slate-50 transition-colors">
+                    <button className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-2xl text-slate-600 font-medium text-[13px] shadow-sm hover:bg-slate-50 transition-colors">
                         <Search size={18} />
                         <span>Quick Search</span>
                     </button>
-                    <button className="flex items-center gap-2 px-6 py-3 bg-slate-900 border-b-4 border-slate-700 hover:bg-slate-800 text-white rounded-2xl font-bold text-sm shadow-xl active:scale-95 transition-all">
+                    <button className="flex items-center gap-2 px-6 py-3 bg-slate-900 border-b-4 border-slate-700 hover:bg-slate-800 text-white rounded-2xl font-medium text-[13px] shadow-xl active:scale-95 transition-all">
                         <Plus size={18} />
                         <span>New Appointment</span>
                     </button>
@@ -105,13 +105,13 @@ const Dashboard = () => {
                             <div className={`w-14 h-14 bg-${card.color} rounded-2xl flex items-center justify-center text-${card.color}-dark shadow-lg shadow-${card.color}/50`}>
                                 <card.icon size={28} />
                             </div>
-                            <div className={`flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full ${card.up ? 'bg-mint text-mint-dark' : 'bg-rose text-rose-dark'}`}>
+                            <div className={`flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full ${card.up ? 'bg-mint text-mint-dark' : 'bg-rose text-rose-dark'}`}>
                                 {card.up ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
                                 {card.change}
                             </div>
                         </div>
-                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1 relative z-10">{card.title}</p>
-                        <h3 className="text-4xl font-bold text-slate-800 relative z-10">{isLoading ? '...' : card.value}</h3>
+                        <p className="text-[11px] font-medium text-slate-400 uppercase tracking-widest mb-1 relative z-10">{card.title}</p>
+                        <h3 className="text-3xl font-semibold text-slate-800 relative z-10">{isLoading ? '...' : card.value}</h3>
                     </motion.div>
                 ))}
             </div>
@@ -128,9 +128,9 @@ const Dashboard = () => {
                             <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400">
                                 <Activity size={20} />
                             </div>
-                            <h4 className="font-bold text-slate-800 text-lg">Hospital Live Activity</h4>
+                            <h4 className="font-semibold text-slate-800 text-base">Hospital Live Activity</h4>
                         </div>
-                        <button className="text-xs font-bold text-sky-dark uppercase tracking-widest hover:bg-sky/40 px-3 py-1.5 rounded-lg transition-colors">See Detailed Logs</button>
+                        <button className="text-[11px] font-semibold text-sky-dark uppercase tracking-widest hover:bg-sky/40 px-3 py-1.5 rounded-lg transition-colors">See Detailed Logs</button>
                     </div>
 
                     <div className="p-4 flex-1">
@@ -151,19 +151,19 @@ const Dashboard = () => {
                                                 {appt.name[0]}
                                             </div>
                                             <div>
-                                                <p className="font-bold text-slate-800">{appt.name} {appt.surname}</p>
-                                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{appt.reason}</p>
+                                                <p className="font-semibold text-slate-800 text-[14px]">{appt.name} {appt.surname}</p>
+                                                <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest">{appt.reason}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-8">
                                             <div className="hidden md:block text-right">
-                                                <p className="text-xs font-bold text-slate-800 tracking-tight">Scheduled Visit</p>
-                                                <div className="flex items-center gap-1.5 justify-end text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                                                <p className="text-[11px] font-medium text-slate-800 tracking-tight">Scheduled Visit</p>
+                                                <div className="flex items-center gap-1.5 justify-end text-[10px] text-slate-400 font-normal uppercase tracking-widest">
                                                     <Clock size={10} />
                                                     {appt.appointmentDate ? `${new Date(appt.appointmentDate).toLocaleDateString()} @ ${appt.timeSlot}` : new Date(appt.createdAt).toLocaleDateString()}
                                                 </div>
                                             </div>
-                                            <div className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+                                            <div className={`px-3 py-1 rounded-full text-[10px] font-medium uppercase tracking-widest ${
                                                 appt.status === 'confirmed' ? 'bg-mint text-mint-dark' : 'bg-sky text-sky-dark'
                                             }`}>
                                                 {appt.status || 'Scheduled'}

@@ -89,8 +89,8 @@ const Inquiries = () => {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 shrink-0">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-800 tracking-tight mb-2">Patient Inquiries</h1>
-                    <p className="text-slate-500 font-sans">Review and respond to messages from the website contact form.</p>
+                    <h1 className="text-2xl font-semibold text-slate-800 tracking-tight mb-1">Patient Inquiries</h1>
+                    <p className="text-[13px] text-slate-500 font-sans">Review and respond to messages from the website contact form.</p>
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="relative group">
@@ -102,7 +102,7 @@ const Inquiries = () => {
                             placeholder="Search name, email, or phone..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-sky/5 focus:border-sky transition-all placeholder:text-slate-400 font-medium text-sm w-[300px]"
+                            className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-sky/5 focus:border-sky transition-all placeholder:text-slate-400 font-normal text-[13px] w-[300px]"
                         />
                     </div>
                 </div>
@@ -116,14 +116,14 @@ const Inquiries = () => {
                              <div className="w-8 h-8 bg-sky rounded-lg flex items-center justify-center text-sky-dark">
                                 <Mail size={16} />
                              </div>
-                             <span className="font-bold text-slate-800 text-sm">Inbox</span>
+                             <span className="font-semibold text-slate-800 text-[13px]">Inbox</span>
                         </div>
                         <div className="flex items-center gap-4">
                             {['All', 'Unread', 'Starred'].map(tab => (
                                 <button 
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg transition-colors ${
+                                    className={`text-[10px] font-medium uppercase tracking-widest px-3 py-1.5 rounded-lg transition-colors ${
                                         activeTab === tab ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-100'
                                     }`}
                                 >
@@ -162,18 +162,18 @@ const Inquiries = () => {
                                                 <User size={18} />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-slate-800 tracking-tight leading-none mb-1 text-sm">{msg.name}</p>
-                                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{msg.phone}</p>
+                                                <p className="font-semibold text-slate-800 tracking-tight text-[13px] leading-none mb-1">{msg.name}</p>
+                                                <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest">{msg.phone}</p>
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-end gap-1.5">
-                                            <span className="text-[10px] font-bold text-slate-300 uppercase tracking-tighter">
+                                            <span className="text-[10px] font-medium text-slate-300 uppercase tracking-tighter">
                                                 {new Date(msg.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}
                                             </span>
                                             {!msg.read && <div className="w-1.5 h-1.5 rounded-full bg-sky shadow-[0_0_8px_#b3f6e1]" />}
                                         </div>
                                     </div>
-                                    <p className="text-xs text-slate-500 font-medium font-sans line-clamp-2 leading-relaxed pl-1">
+                                    <p className="text-[12px] text-slate-500 font-normal font-sans line-clamp-2 leading-relaxed pl-1">
                                         {msg.message}
                                     </p>
                                 </motion.div>
@@ -195,17 +195,17 @@ const Inquiries = () => {
                             >
                                 <div className="p-8 border-b border-slate-50 flex items-center justify-between shrink-0">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-14 h-14 bg-sky rounded-2xl flex items-center justify-center text-sky-dark font-bold text-2xl uppercase shadow-inner">
+                                        <div className="w-14 h-14 bg-sky rounded-2xl flex items-center justify-center text-sky-dark font-semibold text-xl uppercase shadow-inner">
                                             {selectedMessage.name[0]}
                                         </div>
                                         <div>
-                                            <h3 className="text-xl font-bold text-slate-800 tracking-tight">{selectedMessage.name}</h3>
+                                            <h3 className="text-lg font-semibold text-slate-800 tracking-tight">{selectedMessage.name}</h3>
                                             <div className="flex items-center gap-4">
-                                                <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                                                <div className="flex items-center gap-2 text-[11px] font-medium text-slate-400 uppercase tracking-widest">
                                                     <AtSign size={12} className="text-sky" />
                                                     {selectedMessage.email}
                                                 </div>
-                                                <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                                                <div className="flex items-center gap-2 text-[11px] font-medium text-slate-400 uppercase tracking-widest">
                                                     <Phone size={12} className="text-mint" />
                                                     {selectedMessage.phone}
                                                 </div>
@@ -228,7 +228,7 @@ const Inquiries = () => {
                                 <div className="p-10 flex-1 overflow-y-auto">
                                     <div className="mb-10 flex items-center gap-4 bg-slate-50 border border-slate-100 p-4 rounded-2xl w-fit">
                                         <Clock size={16} className="text-slate-400" />
-                                        <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                                        <p className="text-[11px] font-medium text-slate-500 uppercase tracking-widest">
                                             Inquiry Received on {new Date(selectedMessage.createdAt).toLocaleString()}
                                         </p>
                                     </div>
@@ -239,7 +239,7 @@ const Inquiries = () => {
                                         </div>
                                         <div className="flex-1 bg-slate-50 p-8 rounded-[2rem] border border-slate-100 shadow-inner relative">
                                             <div className="absolute -left-3 top-6 w-6 h-6 bg-slate-50 border-l border-b border-slate-100 rotate-45" />
-                                            <p className="text-lg text-slate-800 font-sans leading-relaxed whitespace-pre-wrap relative z-10">
+                                            <p className="text-base text-slate-800 font-sans leading-relaxed whitespace-pre-wrap relative z-10">
                                                 {selectedMessage.message}
                                             </p>
                                         </div>
@@ -248,18 +248,18 @@ const Inquiries = () => {
 
                                 <div className="p-8 border-t border-slate-50 bg-slate-50/20 shrink-0">
                                     <div className="flex items-center gap-4">
-                                        <div className="flex-1 h-16 bg-white border border-slate-200 rounded-2xl flex items-center px-6 text-slate-300 font-sans text-sm shadow-sm cursor-not-allowed">
+                                        <div className="flex-1 h-16 bg-white border border-slate-200 rounded-2xl flex items-center px-6 text-slate-300 font-sans text-[13px] shadow-sm cursor-not-allowed">
                                             Compose clinical response... (Coming Soon)
                                         </div>
                                         {selectedMessage.read ? (
-                                            <div className="h-16 px-10 bg-mint/20 text-mint-dark rounded-2xl font-bold tracking-tight flex items-center gap-3">
+                                            <div className="h-16 px-10 bg-mint/20 text-mint-dark rounded-2xl font-semibold tracking-tight flex items-center gap-3">
                                                 <CheckCircle2 size={20} />
                                                 <span>Resolved</span>
                                             </div>
                                         ) : (
                                             <button 
                                                 onClick={() => handleResolve(selectedMessage._id)}
-                                                className="h-16 px-10 bg-slate-900 text-white rounded-2xl font-bold tracking-tight shadow-xl shadow-slate-200 transition-all hover:scale-105 active:scale-95 flex items-center gap-3"
+                                                className="h-16 px-10 bg-slate-900 text-white rounded-2xl font-medium tracking-tight shadow-xl shadow-slate-200 transition-all hover:scale-105 active:scale-95 flex items-center gap-3"
                                             >
                                                 <CheckCircle2 size={20} />
                                                 <span>Mark as Resolved</span>
@@ -273,8 +273,8 @@ const Inquiries = () => {
                                 <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center text-slate-200 mb-8 border border-slate-100 shadow-inner group transition-all">
                                     <Mail size={48} className="group-hover:scale-110 transition-transform" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-slate-800 mb-3 tracking-tight">Email Viewer</h3>
-                                <p className="text-slate-400 max-w-[280px] font-sans leading-relaxed">Select a patient message from the inbox to read the full inquiry details.</p>
+                                <h3 className="text-xl font-semibold text-slate-800 mb-2 tracking-tight">Email Viewer</h3>
+                                <p className="text-[13px] text-slate-400 max-w-[280px] font-sans leading-relaxed">Select a patient message from the inbox to read the full inquiry details.</p>
                             </div>
                         )}
                     </AnimatePresence>
